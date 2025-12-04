@@ -1,12 +1,11 @@
-const products = [
-  { id: 1, name: "Amazing Spider-Man #300", price: 1200, stock: 1 },
-  { id: 2, name: "Batman #50", price: 500, stock: 1 }
-];
+import pool from "../../db/pool.js";
 
-export function getProducts(req, res) {
+export async function getProducts(req, res) {
   try {
-    res.json(products);
-  } catch (error) {
+    const result = await pool.query("SELECT * FROM product");
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ error: "Server error" });
   }
 }
