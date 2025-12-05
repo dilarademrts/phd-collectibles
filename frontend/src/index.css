@@ -1,68 +1,198 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+@layer base {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --background: 240 17% 98%;
+    --foreground: 240 20% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 20% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 20% 12%;
+
+    --primary: 233 85% 64%;
+    --primary-foreground: 0 0% 100%;
+    
+    --primary-gradient-start: 267 85% 60%;
+    --primary-gradient-mid: 233 85% 64%;
+    --primary-gradient-end: 180 85% 60%;
+
+    --secondary: 240 10% 96%;
+    --secondary-foreground: 240 20% 12%;
+
+    --muted: 240 10% 96%;
+    --muted-foreground: 240 12% 50%;
+
+    --accent: 180 85% 60%;
+    --accent-foreground: 240 20% 12%;
+    
+    --neon-mint: 160 85% 60%;
+    --neon-pink: 330 85% 70%;
+    --electric-blue: 210 95% 65%;
+    
+    --success: 142 76% 45%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 12% 90%;
+    --input: 240 12% 92%;
+    --ring: 233 85% 64%;
+
+    --radius: 1rem;
+    
+    --glow-primary: 233 85% 64%;
+    --glow-accent: 180 85% 60%;
+    
+    --glass-bg: 0 0% 100%;
+    --glass-border: 240 12% 90%;
+
+    --sidebar-background: 240 17% 98%;
+    --sidebar-foreground: 240 20% 12%;
+    --sidebar-primary: 233 85% 64%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 10% 94%;
+    --sidebar-accent-foreground: 240 20% 12%;
+    --sidebar-border: 240 12% 90%;
+    --sidebar-ring: 233 85% 64%;
   }
-  a:hover {
-    color: #747bff;
+
+  .dark {
+    --background: 240 20% 6%;
+    --foreground: 240 10% 98%;
+
+    --card: 240 18% 10%;
+    --card-foreground: 240 10% 98%;
+
+    --popover: 240 18% 10%;
+    --popover-foreground: 240 10% 98%;
+
+    --primary: 233 85% 64%;
+    --primary-foreground: 0 0% 100%;
+    
+    --primary-gradient-start: 267 85% 60%;
+    --primary-gradient-mid: 233 85% 64%;
+    --primary-gradient-end: 180 85% 60%;
+
+    --secondary: 240 15% 15%;
+    --secondary-foreground: 240 10% 98%;
+
+    --muted: 240 15% 15%;
+    --muted-foreground: 240 10% 65%;
+
+    --accent: 180 85% 60%;
+    --accent-foreground: 0 0% 100%;
+    
+    --neon-mint: 160 85% 60%;
+    --neon-pink: 330 85% 70%;
+    --electric-blue: 210 95% 65%;
+    
+    --success: 142 76% 45%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 15% 20%;
+    --input: 240 15% 18%;
+    --ring: 233 85% 64%;
+    
+    --glow-primary: 233 85% 64%;
+    --glow-accent: 180 85% 60%;
+    
+    --glass-bg: 240 18% 10%;
+    --glass-border: 240 15% 20%;
+
+    --sidebar-background: 240 20% 8%;
+    --sidebar-foreground: 240 10% 98%;
+    --sidebar-primary: 233 85% 64%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 15% 15%;
+    --sidebar-accent-foreground: 240 10% 98%;
+    --sidebar-border: 240 15% 20%;
+    --sidebar-ring: 233 85% 64%;
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary-gradient-start)), hsl(var(--primary-gradient-mid)), hsl(var(--primary-gradient-end)));
+  }
+  
+  .gradient-card {
+    background: linear-gradient(135deg, hsl(var(--primary-gradient-start) / 0.1), hsl(var(--primary-gradient-end) / 0.1));
+  }
+  
+  .glass-card {
+    background: hsl(var(--glass-bg) / 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--glass-border) / 0.5);
+  }
+  
+  .glow-primary {
+    box-shadow: 0 0 40px hsl(var(--glow-primary) / 0.3);
+  }
+  
+  .glow-accent {
+    box-shadow: 0 0 40px hsl(var(--glow-accent) / 0.3);
+  }
+  
+  .floating-card {
+    box-shadow: 
+      0 10px 40px -10px hsl(var(--primary) / 0.2),
+      0 0 0 1px hsl(var(--border) / 0.5);
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary-gradient-start)), hsl(var(--primary-gradient-mid)), hsl(var(--primary-gradient-end)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .animate-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
+  
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--glow-primary) / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--glow-primary) / 0.6);
+    }
+  }
+  
+  .hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px -10px hsl(var(--primary) / 0.3);
   }
 }
