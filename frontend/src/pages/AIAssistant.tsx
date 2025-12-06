@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Send, TrendingUp, Package, ShoppingCart, AlertTriangle, Sparkles, BarChart3, FileText, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+// import { Input } from '@/components/ui/input'; // Kullanılmıyorsa çıkarabilirsin
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
+// --- SABİT VERİLER (Grafikler vb. için) ---
 const predictiveData = [
   { month: 'Jan', actual: 45000, predicted: 47000 },
   { month: 'Feb', actual: 52000, predicted: 54000 },
@@ -21,30 +22,30 @@ const predictiveData = [
 const suggestions = [
   {
     icon: TrendingUp,
-    title: 'Top 5 Products Last Month',
-    description: 'Show best-selling items from previous period',
-    badge: 'Sales',
+    title: 'Elimde Spider-Man #300 var',
+    description: 'Fiyat analizi ve değerleme',
+    badge: 'Değerleme',
     color: 'from-primary to-accent',
   },
   {
     icon: AlertTriangle,
-    title: 'Low Stock Items',
-    description: 'Products that need restocking soon',
-    badge: 'Inventory',
+    title: 'Stokta hangi X-Men sayıları var?',
+    description: 'Envanter kontrolü',
+    badge: 'Stok',
     color: 'from-warning to-destructive',
   },
   {
     icon: ShoppingCart,
-    title: 'Abandoned Cart Analysis',
-    description: 'Recovery opportunities and insights',
-    badge: 'Marketing',
+    title: 'En pahalı ürün hangisi?',
+    description: 'Mağaza içi analiz',
+    badge: 'Analiz',
     color: 'from-neon-mint to-neon-blue',
   },
   {
     icon: Package,
-    title: 'Pre-Order Forecast',
-    description: 'Upcoming pre-order deliveries',
-    badge: 'Operations',
+    title: 'Yeni başlayanlar için ne önerirsin?',
+    description: 'Yatırım tavsiyesi',
+    badge: 'Öneri',
     color: 'from-neon-pink to-primary',
   },
 ];
@@ -83,36 +84,70 @@ interface Message {
 }
 
 export default function AIAssistant() {
+  // --- STATE TANIMLARI ---
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: "Hello! I'm your AI assistant. I can help you analyze sales data, generate reports, and provide insights. What would you like to know?",
+      content: "Selam Kaptan! 👋 Ben Stan. PHD Collectibles'ın yapay zeka beyniyim. Bana koleksiyon parçaları, fiyatlar veya dükkan hakkında her şeyi sorabilirsin! 🕷️",
       timestamp: new Date(),
     },
   ]);
   const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // Yükleniyor durumu eklendi
 
-  const handleSend = () => {
-    if (!input.trim()) return;
+  // --- GERÇEK BACKEND BAĞLANTISI ---
+  const handleSend = async (overrideInput?: string) => {
+    const textToSend = overrideInput || input;
+    if (!textToSend.trim()) return;
 
+    // 1. Kullanıcı mesajını ekle
     const userMessage: Message = {
       role: 'user',
-      content: input,
+      content: textToSend,
       timestamp: new Date(),
     };
 
-    const assistantMessage: Message = {
-      role: 'assistant',
-      content: "I'm analyzing your request... Based on your sales data, here are the insights you requested.",
-      timestamp: new Date(),
-    };
-
-    setMessages([...messages, userMessage, assistantMessage]);
+    // Mevcut mesajlara kullanıcı mesajını ekle
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
     setInput('');
+    setIsLoading(true); // Yüklemeyi başlat
+
+    try {
+      // 2. Backend'e İstek At (Stan'in Beyni)
+      const response = await fetch('http://localhost:5001/ai/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: textToSend })
+      });
+
+      const data = await response.json();
+
+      // 3. Stan'in cevabını ekle
+      const assistantMessage: Message = {
+        role: 'assistant',
+        content: data.answer || "Bağlantı hatası! Backend çalışıyor mu dostum? 🔌",
+        timestamp: new Date(),
+      };
+
+      setMessages([...newMessages, assistantMessage]);
+
+    } catch (error) {
+      console.error("AI Hatası:", error);
+      const errorMessage: Message = {
+        role: 'assistant',
+        content: "Üzgünüm, sunucuya ulaşamıyorum. Lütfen backend terminalini kontrol et! 🤖💥",
+        timestamp: new Date(),
+      };
+      setMessages([...newMessages, errorMessage]);
+    } finally {
+      setIsLoading(false); // Yüklemeyi bitir
+    }
   };
 
+  // Öneriye tıklanınca direkt gönder
   const handleSuggestionClick = (title: string) => {
-    setInput(title);
+    handleSend(title);
   };
 
   return (
@@ -120,10 +155,10 @@ export default function AIAssistant() {
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold bg-gradient-to-r from-primary via-neon-pink to-neon-mint bg-clip-text text-transparent">
-          AI Assistant
+          AI Koleksiyon Uzmanı (Stan)
         </h1>
         <p className="text-muted-foreground mt-2">
-          Your intelligent analytics companion powered by advanced AI
+          Akıllı asistanınız çizgi roman dünyasını analiz ediyor...
         </p>
       </div>
 
@@ -135,12 +170,12 @@ export default function AIAssistant() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Sparkles className="h-5 w-5 text-primary animate-pulse" />
-                Chat with AI
+                Stan ile Sohbet
               </CardTitle>
-              <CardDescription>Ask questions in natural language</CardDescription>
+              <CardDescription>Doğal dilde sorular sorun (Örn: Batman #251 ne kadar?)</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4 mb-4 h-[400px] overflow-y-auto">
+              <div className="space-y-4 mb-4 h-[400px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-primary/20">
                 {messages.map((message, idx) => (
                   <div
                     key={idx}
@@ -150,24 +185,35 @@ export default function AIAssistant() {
                       className={`max-w-[80%] rounded-2xl px-4 py-3 ${
                         message.role === 'user'
                           ? 'bg-gradient-to-r from-primary to-accent text-primary-foreground'
-                          : 'glass-panel border border-border/50'
+                          : 'glass-panel border border-border/50 bg-secondary/10'
                       }`}
                     >
-                      <p className="text-sm">{message.content}</p>
-                      <p className="text-xs opacity-60 mt-1">
-                        {message.timestamp.toLocaleTimeString()}
+                      <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
+                      <p className="text-xs opacity-60 mt-1 text-right">
+                        {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </p>
                     </div>
                   </div>
                 ))}
+                {/* Yükleniyor Animasyonu */}
+                {isLoading && (
+                  <div className="flex justify-start">
+                    <div className="glass-panel border border-border/50 bg-secondary/10 rounded-2xl px-4 py-3 flex items-center gap-2">
+                      <span className="w-2 h-2 bg-primary rounded-full animate-bounce"></span>
+                      <span className="w-2 h-2 bg-primary rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                      <span className="w-2 h-2 bg-primary rounded-full animate-bounce [animation-delay:0.4s]"></span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Input */}
               <div className="flex gap-2">
                 <Textarea
-                  placeholder="Ask anything... e.g., 'Show me top products from last month'"
+                  placeholder="Stan'e bir şeyler sor..."
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
+                  disabled={isLoading}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' && !e.shiftKey) {
                       e.preventDefault();
@@ -178,23 +224,24 @@ export default function AIAssistant() {
                   rows={2}
                 />
                 <Button
-                  onClick={handleSend}
-                  className="bg-gradient-to-r from-primary to-accent hover:opacity-90 h-auto"
+                  onClick={() => handleSend()}
+                  disabled={isLoading || !input.trim()}
+                  className="bg-gradient-to-r from-primary to-accent hover:opacity-90 h-auto px-6"
                 >
-                  <Send className="h-4 w-4" />
+                  {isLoading ? <span className="animate-spin">⏳</span> : <Send className="h-4 w-4" />}
                 </Button>
               </div>
             </CardContent>
           </Card>
 
-          {/* Predictive Sales Chart */}
+          {/* Predictive Sales Chart (Burası görsel olarak kalabilir, demoda güzel durur) */}
           <Card className="glass-panel border-border/50">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <BarChart3 className="h-5 w-5 text-neon-mint" />
-                Predictive Sales Forecast
+                Gelecek Ay Tahmini (AI)
               </CardTitle>
-              <CardDescription>AI-powered revenue predictions</CardDescription>
+              <CardDescription>Gemini Destekli Gelir Tahmini</CardDescription>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -229,11 +276,11 @@ export default function AIAssistant() {
               <div className="flex justify-center gap-6 mt-4">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-primary" />
-                  <span className="text-sm text-muted-foreground">Actual</span>
+                  <span className="text-sm text-muted-foreground">Gerçekleşen</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-neon-mint" />
-                  <span className="text-sm text-muted-foreground">Predicted</span>
+                  <span className="text-sm text-muted-foreground">AI Tahmini</span>
                 </div>
               </div>
             </CardContent>
@@ -242,14 +289,14 @@ export default function AIAssistant() {
 
         {/* Sidebar */}
         <div className="space-y-6">
-          {/* Quick Suggestions */}
+          {/* Quick Suggestions - Bunları güncelledim */}
           <Card className="glass-panel border-border/50">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Zap className="h-5 w-5 text-warning" />
-                Quick Insights
+                Hızlı Sorular
               </CardTitle>
-              <CardDescription>Popular queries</CardDescription>
+              <CardDescription>Stan'e şunları sorabilirsin:</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               {suggestions.map((suggestion, idx) => (
@@ -269,9 +316,6 @@ export default function AIAssistant() {
                       <p className="text-xs text-muted-foreground mt-1">
                         {suggestion.description}
                       </p>
-                      <Badge variant="secondary" className="mt-2 text-xs">
-                        {suggestion.badge}
-                      </Badge>
                     </div>
                   </div>
                 </button>
@@ -284,9 +328,9 @@ export default function AIAssistant() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <FileText className="h-5 w-5 text-neon-pink" />
-                Auto Reports
+                Otomatik Raporlar
               </CardTitle>
-              <CardDescription>AI-generated insights</CardDescription>
+              <CardDescription>Günlük Özet</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               {autoReports.map((report, idx) => (
@@ -310,11 +354,11 @@ export default function AIAssistant() {
                       variant={report.trend === 'up' ? 'default' : 'secondary'}
                       className="text-xs"
                     >
-                      {report.trend === 'up' ? '↑ Increasing' : '↓ Decreasing'}
+                      {report.trend === 'up' ? '↑ Artış' : '↓ Düşüş'}
                     </Badge>
                   </div>
                 </div>
-              ))}
+              ))} 
             </CardContent>
           </Card>
         </div>
