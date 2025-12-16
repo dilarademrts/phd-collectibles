@@ -8,6 +8,7 @@ const fs = require('fs');
 // Kendi oluşturduğumuz dosyalar
 const db = require('./src/db'); 
 const aiRoutes = require('./src/integrations/ai/ai.routes'); 
+const ordersRoutes = require("./src/routes/orders.routes");
 
 const app = express();
 const PORT = process.env.PORT || 5002;
@@ -18,6 +19,7 @@ app.use(express.json());
 
 // AI Rotaları
 app.use('/ai', aiRoutes);
+app.use("/orders", ordersRoutes);
 
 // Uploads klasörü kontrolü
 const uploadDir = 'uploads';
