@@ -2,38 +2,44 @@ import { DollarSign, ShoppingCart, Package, Clock, TrendingUp, Users } from "luc
 import { KPICard } from "@/components/dashboard/KPICard";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "@/lib/api";
 
 export default function Dashboard() {
+  const kpisQ = useQuery({ queryKey: ["kpis"], queryFn: api.kpis });
+  const k = kpisQ.data;
+
   const kpiData = [
     {
-      title: "Total Revenue",
-      value: "$124,589",
-      change: "+12.5% from last month",
+      title: "Today Sales",
+      value: String(Number(k?.today_sales_total ?? 0)),
+      change: "from today",
       trend: "up" as const,
       icon: DollarSign,
     },
     {
-      title: "Total Orders",
-      value: "2,847",
-      change: "+8.2% from last month",
+      title: "Completed Orders Today",
+      value: String(Number(k?.completed_orders_today ?? 0)),
+      change: "from today",
       trend: "up" as const,
       icon: ShoppingCart,
     },
     {
-      title: "Pre-Orders",
-      value: "341",
-      change: "+23.1% from last month",
-      trend: "up" as const,
-      icon: Clock,
-    },
-    {
-      title: "Products",
-      value: "1,234",
-      change: "+4 new this week",
+      title: "Low Stock",
+      value: String(Number(k?.low_stock_count ?? 0)),
+      change: "products < 3",
       trend: "up" as const,
       icon: Package,
     },
+    {
+      title: "Pre-Orders",
+      value: "—",
+      change: "coming soon",
+      trend: "up" as const,
+      icon: Clock,
+    },
   ];
+
 
   const recentOrders = [
     { id: "#ORD-2847", customer: "Sarah Johnson", amount: "$234.00", status: "Completed", type: "Live" },
