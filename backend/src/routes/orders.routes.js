@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db");
 const { generateInvoice } = require("../modules/invoices/invoice.service");
+const { sendMail } = require("../modules/notifications/mail.service");
 
 // GET /orders  → admin sipariş listesi
 router.get("/", async (req, res) => {
@@ -60,6 +61,12 @@ router.patch("/:id/complete", async (req, res) => {
        VALUES ($1, $2, $3)`,
       [id, pdf.fileName, pdf.filePath]
     );
+    
+    await sendMail({
+      subject: `Invoice hazır: ${pdf.fileName}`,
+      text: `Order ${id} tamamlandı. Fatura hazır: ${pdf.fileName}`
+    });
+
 
     await client.query("COMMIT");
 
