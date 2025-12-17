@@ -1,0 +1,130 @@
+[
+  {
+    "time_offset": 5,
+    "type": "CHAT",
+    "user": "Mod_Zeynep",
+    "message": "Herkese merhaba! Bugün efsane koleksiyon parçaları var. 🚀"
+  },
+  {
+    "time_offset": 10,
+    "type": "SYSTEM",
+    "message": "🔴 YAYIN BAŞLADI - Keyifli alışverişler!"
+  },
+  {
+    "time_offset": 15,
+    "type": "CHAT",
+    "user": "Collector_Can",
+    "message": "Batman figürü stoğa girdi mi? Beklemekten ağaç olduk :)"
+  },
+  {
+    "time_offset": 25,
+    "type": "CHAT",
+    "user": "Merve_99",
+    "message": "Fiyatlar çok iyi görünüyor."
+  },
+  
+  
+  {
+    "time_offset": 30,
+    "type": "SYSTEM",
+    "message": "🔥 TREND ALARMI: 'Batman The Dark Knight' ürününe yoğun ilgi var!"
+  },
+  {
+    "time_offset": 35,
+    "type": "PURCHASE",
+    "user": "GizemliMusteri",
+    "product_name": "Batman The Dark Knight - 1/6 Scale",
+    "quantity": 1
+  },
+  {
+    "time_offset": 40,
+    "type": "PURCHASE",
+    "user": "AhmetYilmaz",
+    "product_name": "Batman The Dark Knight - 1/6 Scale",
+    "quantity": 1
+  },
+  {
+    "time_offset": 45,
+    "type": "SYSTEM",
+    "message": "⚠️ KRİTİK STOK: Batman figürü tükenmek üzere! Son adetler."
+  },
+
+
+  {
+    "time_offset": 55,
+    "type": "PURCHASE",
+    "user": "Merve_99",
+    "product_name": "Batman The Dark Knight - 1/6 Scale",
+    "quantity": 1
+  },
+  {
+    "time_offset": 60,
+    "type": "SYSTEM",
+    "message": "❌ TÜKENDİ (SOLD OUT): Batman The Dark Knight stoğu bitti!"
+  },
+  {
+    "time_offset": 65,
+    "type": "PURCHASE_ATTEMPT",
+    "user": "GecKalanAdam",
+    "product_name": "Batman The Dark Knight - 1/6 Scale",
+    "quantity": 1,
+    "expected_result": "FAIL"
+  },
+  {
+    "time_offset": 68,
+    "type": "CHAT",
+    "user": "GecKalanAdam",
+    "message": "Ya tüh kaçırdık! Başka ne var?"
+  },
+
+
+  {
+    "time_offset": 75,
+    "type": "AI_TRIGGER",
+    "message": "💡 AI ÖNERİSİ: Batman sevenler bunu da sevdi! 'Joker - Heath Ledger' ürününde kampanya."
+  },
+  {
+    "time_offset": 80,
+    "type": "CHAT",
+    "user": "Collector_Can",
+    "message": "Joker efsane duruyor, Batman'i kaçırdık bunu alalım."
+  },
+  {
+    "time_offset": 85,
+    "type": "PURCHASE",
+    "user": "Collector_Can",
+    "product_name": "Joker - Heath Ledger Edition",
+    "quantity": 1
+  },
+  {
+    "time_offset": 90,
+    "type": "SYSTEM",
+    "message": "⚡ PAIR SATIŞI: Bir kullanıcı az önce Joker figürü satın aldı."
+  },
+  {
+    "time_offset": 95,
+    "type": "PURCHASE",
+    "user": "Merve_99",
+    "product_name": "Joker - Heath Ledger Edition",
+    "quantity": 1
+  },
+  {
+    "time_offset": 100,
+    "type": "CHAT",
+    "user": "Merve_99",
+    "message": "Batman'in yanına Joker şarttı zaten, ikisi birlikte harika olacak! 😍"
+  },
+
+
+  {
+    "time_offset": 110,
+    "type": "SYSTEM",
+    "message": "📊 YAYIN RAPORU: 2 Dakikada 15.000₺ Ciroya ulaşıldı."
+  },
+  {
+    "time_offset": 120,
+    "type": "CHAT",
+    "user": "Mod_Zeynep",
+    "message": "Katılan herkese teşekkürler! Bir sonraki yayında görüşmek üzere."
+  }
+]

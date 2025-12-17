@@ -1,0 +1,42 @@
+[
+  {
+    "category": "Action Figures",
+    "items": [
+      { "name": "Batman The Dark Knight - 1/6 Scale", "description": "Detaylı Batman figürü.", "price": 4500, "stock": 2, "image_url": "https://via.placeholder.com/150", "note": "LOW STOCK" },
+      { "name": "Joker - Heath Ledger Edition", "description": "Efsanevi Joker figürü.", "price": 4200, "stock": 15, "image_url": "https://via.placeholder.com/150", "note": "PAIR TARGET" },
+      { "name": "Iron Man Mark 85 Diecast", "description": "Metal alaşımlı.", "price": 8500, "stock": 0, "image_url": "https://via.placeholder.com/150", "note": "SOLD OUT" },
+      { "name": "Captain America - Endgame", "description": "Mjolnir dahil.", "price": 5000, "stock": 8, "image_url": "https://via.placeholder.com/150" },
+      { "name": "Thor - Fat Thor Version", "description": "Özel göbekli versiyon.", "price": 4800, "stock": 12, "image_url": "https://via.placeholder.com/150" }
+    ]
+  },
+  {
+    "category": "Comics",
+    "items": [
+      { "name": "Amazing Spider-Man #300", "description": "Venom ilk görünüm.", "price": 1200, "stock": 50, "image_url": "https://via.placeholder.com/150" },
+      { "name": "Watchmen Deluxe Edition", "description": "Hardcover.", "price": 800, "stock": 4, "image_url": "https://via.placeholder.com/150" },
+      { "name": "The Killing Joke - First Print", "description": "Joker orijin hikayesi.", "price": 1500, "stock": 6, "image_url": "https://via.placeholder.com/150", "note": "PAIR WITH BATMAN" },
+      { "name": "Sandman Vol 1", "description": "Neil Gaiman.", "price": 600, "stock": 20, "image_url": "https://via.placeholder.com/150" }
+    ]
+  },
+  {
+    "category": "Statues",
+    "items": [
+      { "name": "Darth Vader Premium Format", "description": "70cm heykel.", "price": 25000, "stock": 1, "image_url": "https://via.placeholder.com/150" },
+      { "name": "Gandalf the Grey", "description": "Yüzüklerin Efendisi.", "price": 18000, "stock": 3, "image_url": "https://via.placeholder.com/150" }
+    ]
+  },
+  {
+    "category": "Prop Replicas",
+    "items": [
+      { "name": "Harry Potter Wand", "description": "Orijinal asa.", "price": 900, "stock": 100, "image_url": "https://via.placeholder.com/150" },
+      { "name": "Batarang Replica", "description": "Metal fırlatma diski.", "price": 1500, "stock": 5, "image_url": "https://via.placeholder.com/150" }
+    ]
+  },
+  {
+    "category": "Apparel",
+    "items": [
+      { "name": "Stark Industries T-Shirt", "description": "Pamuklu tişört.", "price": 400, "stock": 60, "image_url": "https://via.placeholder.com/150" },
+      { "name": "Wayne Enterprises Hoodie", "description": "Siyah kapüşonlu.", "price": 1200, "stock": 40, "image_url": "https://via.placeholder.com/150" }
+    ]
+  }
+]
