@@ -6,14 +6,13 @@ const seedData = async () => {
   try {
     console.log('🌱 Akıllı Seeding işlemi başlıyor...');
 
-    // 1. Temizlik
+    
     await db.query('TRUNCATE TABLE order_items, orders, product, categories RESTART IDENTITY CASCADE');
 
-    // 2. Ürünleri Yükle
     const dataPath = path.join(__dirname, 'data', 'products.json');
     const categoriesData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
 
-    let productsMap = {}; // Ürün adına göre ID bulmak için
+    let productsMap = {};
     let allProductIds = [];
 
     for (const cat of categoriesData) {
@@ -26,7 +25,6 @@ const seedData = async () => {
           [item.name, item.description, item.price, item.stock, item.image_url, categoryId]
         );
         const p = prodRes.rows[0];
-        // Hem listeye hem haritaya ekle
         allProductIds.push({ id: p.id, price: parseFloat(p.price), name: p.name });
         productsMap[p.name] = { id: p.id, price: parseFloat(p.price) };
       }

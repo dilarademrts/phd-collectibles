@@ -31,8 +31,11 @@ router.get("/summary", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const result = await db.query(
-      "SELECT order_id, status, total_amount, order_date FROM orders ORDER BY order_date DESC"
-    );
+  // 1. id'yi "order_id" olarak al
+  // 2. created_at'i "order_date" olarak al (Frontend bozulmasın diye)
+  // 3. Sıralamayı da gerçek sütun ismi olan "created_at"e göre yap
+  "SELECT id AS order_id, status, total_amount, created_at AS order_date FROM orders ORDER BY created_at DESC"
+);
     res.json(result.rows);
   } catch (err) {
     console.error(err);
@@ -51,9 +54,11 @@ router.patch("/:id/complete", async (req, res) => {
 
     // 1️⃣ Order'ı completed yap
     const orderRes = await client.query(
-      "UPDATE orders SET status='completed' WHERE order_id=$1 RETURNING order_id, order_date, total_amount",
-      [id]
-    );
+  // 1. WHERE kısmında gerçek isim "id" kullanılır.
+  // 2. RETURNING kısmında frontend için eski isimler "AS" ile geri verilir.
+  "UPDATE orders SET status='completed' WHERE id=$1 RETURNING id AS order_id, created_at AS order_date, total_amount",
+  [id]
+);
 
     if (orderRes.rowCount === 0) {
       await client.query("ROLLBACK");

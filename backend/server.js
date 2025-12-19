@@ -14,7 +14,7 @@ const analyticsRoutes = require("./src/routes/analytics.routes");
 const productsRoutes = require("./src/routes/products.routes");
 
 const app = express();
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT || 5001;
 
 // Middleware'ler
 app.use(cors());
