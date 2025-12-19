@@ -29,6 +29,9 @@ export const api = {
   completeOrder: (id: string) => json(`/orders/${id}/complete`, { method: "PATCH" }),
   ordersSummary: () => json<Record<string, number>>("/orders/summary"),
 
+  // products
+  products: () => json<Array<{ product_id: string; name: string; price: any; stock_quantity: any }>>("/products"),
+
 
   // invoices download
   async downloadInvoice(orderId: string) {
