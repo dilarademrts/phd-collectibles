@@ -1,39 +1,76 @@
-import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Zap, Eye, Gavel, DollarSign, Play, Square, Ban, MessageSquare, Package, CheckCircle2 } from 'lucide-react';
+import { useMemo, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Zap, Eye, Gavel, DollarSign, Play, Square, Ban, MessageSquare, Package, CheckCircle2 } from "lucide-react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { api } from "@/lib/api";
+import { toast } from "sonner";
 
 export default function Automation() {
+  const qc = useQueryClient();
+
   const [isLive, setIsLive] = useState(false);
-  const [activeProductId, setActiveProductId] = useState<number | null>(null);
+  const [liveSaleId, setLiveSaleId] = useState<string | null>(null);
+  const [activeProductId, setActiveProductId] = useState<string | null>(null);
 
   const [chats, setChats] = useState([
-    { id: 1, user: "TrollKing99", msg: "Bu fiyatlar ne ya çöp!", risk: "high", isBanned: false },
-    { id: 2, user: "SpideyFan", msg: "Hulk ne zaman çıkacak?", risk: "low", isBanned: false },
-    { id: 3, user: "RichGuy", msg: "$4000 veririm hemen.", risk: "low", isBanned: false },
-    { id: 4, user: "Scammer123", msg: "Bedava nitro için tıkla...", risk: "high", isBanned: false },
+    { id: 1, user: "TrollKing99", msg: "Bu fiyatlar ne ya çöp!", risk: "high" as const, isBanned: false },
+    { id: 2, user: "SpideyFan", msg: "Hulk ne zaman çıkacak?", risk: "low" as const, isBanned: false },
+    { id: 3, user: "RichGuy", msg: "$4000 veririm hemen.", risk: "low" as const, isBanned: false },
+    { id: 4, user: "Scammer123", msg: "Bedava nitro için tıkla...", risk: "high" as const, isBanned: false },
   ]);
 
-  const products = [
-    { id: 1, name: "Amazing Spider-Man #300", price: 1250, status: 'pending', img: "🕷️" },
-    { id: 2, name: "Incredible Hulk #181", price: 3500, status: 'pending', img: "🟢" },
-    { id: 3, name: "Batman #1 (1940)", price: 8000, status: 'sold', img: "🦇" },
-    { id: 4, name: "X-Men #1", price: 5400, status: 'pending', img: "❌" },
-  ];
+  // ✅ DB ürünleri
+  const productsQ = useQuery({
+    queryKey: ["products"],
+    queryFn: api.products,
+  });
 
-  const toggleStream = () => {
-    if (isLive) setActiveProductId(null);
-    setIsLive(!isLive);
+  const products = productsQ.data ?? [];
+
+  const activeProduct = useMemo(
+    () => products.find((p) => p.product_id === activeProductId),
+    [products, activeProductId]
+  );
+
+  const startLiveM = useMutation({
+    mutationFn: () => api.startLive({ stream_platform: "Instagram", stream_id: "demo-admin" }),
+    onSuccess: (data) => {
+      setIsLive(true);
+      setLiveSaleId(data.live.live_sale_id);
+      toast.success("Yayın başladı");
+    },
+    onError: (e: any) => toast.error(e.message ?? "Live start hata"),
+  });
+
+  const stopLive = () => {
+    setIsLive(false);
+    setLiveSaleId(null);
+    setActiveProductId(null);
+    toast.message("Yayın kapatıldı (UI)");
   };
 
-  const pushToLive = (id: number) => setActiveProductId(id);
+  const claimM = useMutation({
+    mutationFn: (payload: { live_sale_id: string; product_id: string }) =>
+      api.claim({ live_sale_id: payload.live_sale_id, product_id: payload.product_id, user: "Ali" }),
+    onSuccess: (data: any) => {
+      toast.success(`Claim OK → Order: ${data?.order?.order_id ?? ""}`);
+      qc.invalidateQueries({ queryKey: ["orders"] });
+      qc.invalidateQueries({ queryKey: ["orders-summary"] });
+      qc.invalidateQueries({ queryKey: ["kpis"] });
+      qc.invalidateQueries({ queryKey: ["sales-daily"] });
+      qc.invalidateQueries({ queryKey: ["stock-by-category"] });
+      qc.invalidateQueries({ queryKey: ["products"] });
+    },
+    onError: (e: any) => toast.error(e.message ?? "Claim hata"),
+  });
+
+  const pushToLive = (id: string) => setActiveProductId(id);
 
   const handleBan = (chatId: number) => {
-    setChats(prevChats => prevChats.map(chat => 
-      chat.id === chatId ? { ...chat, isBanned: true } : chat
-    ));
+    setChats((prev) => prev.map((c) => (c.id === chatId ? { ...c, isBanned: true } : c)));
   };
 
   return (
@@ -44,29 +81,39 @@ export default function Automation() {
           <h1 className="text-3xl font-bold bg-gradient-to-r from-primary via-neon-pink to-neon-mint bg-clip-text text-transparent">
             Live Ops Center
           </h1>
-          <p className="text-muted-foreground mt-2">
-            Yayın Akışı ve Mezat Kontrol Paneli (Reji)
-          </p>
+          <p className="text-muted-foreground mt-2">Yayın Akışı ve Mezat Kontrol Paneli (Admin)</p>
+
+          {isLive && liveSaleId && (
+            <div className="mt-2 text-xs text-muted-foreground">
+              Live Sale ID: <span className="font-mono">{liveSaleId}</span>
+            </div>
+          )}
         </div>
-        
-        <Button 
-          size="lg" 
-          onClick={toggleStream}
+
+        <Button
+          size="lg"
+          onClick={() => {
+            if (isLive) stopLive();
+            else startLiveM.mutate();
+          }}
+          disabled={startLiveM.isPending}
           className={`font-bold text-lg px-8 shadow-xl transition-all ${
-            isLive 
-            ? "bg-red-600 hover:bg-red-700 animate-pulse shadow-red-500/20" 
-            : "bg-green-600 hover:bg-green-700 shadow-green-500/20"
+            isLive ? "bg-red-600 hover:bg-red-700 animate-pulse shadow-red-500/20" : "bg-green-600 hover:bg-green-700 shadow-green-500/20"
           }`}
         >
           {isLive ? (
-            <><Square className="mr-2 h-5 w-5 fill-current" /> YAYINI BİTİR</>
+            <>
+              <Square className="mr-2 h-5 w-5 fill-current" /> YAYINI BİTİR
+            </>
           ) : (
-            <><Play className="mr-2 h-5 w-5 fill-current" /> YAYINI BAŞLAT</>
+            <>
+              <Play className="mr-2 h-5 w-5 fill-current" /> YAYINI BAŞLAT
+            </>
           )}
         </Button>
       </div>
 
-      {/* İSTATİSTİKLER (Düzeltildi: Responsive Fontlar) */}
+      {/* İSTATİSTİKLER */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Card className="glass-panel border-border/50 bg-card/50">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-4">
@@ -96,7 +143,6 @@ export default function Automation() {
             <DollarSign className="h-3 w-3 text-green-500" />
           </CardHeader>
           <CardContent className="p-4 pt-0">
-            {/* BURASI DÜZELTİLDİ: Taşmayı önleyen classlar */}
             <div className="text-xl md:text-2xl font-black tracking-tight truncate">$12,450</div>
             <p className="text-[10px] text-muted-foreground">%85 Hedef</p>
           </CardContent>
@@ -108,68 +154,98 @@ export default function Automation() {
             <Package className="h-3 w-3 text-neon-pink" />
           </CardHeader>
           <CardContent className="p-4 pt-0">
-            <div className="text-xl md:text-2xl font-black">4 / 12</div>
-            <p className="text-[10px] text-muted-foreground">Bitiş: 20:45</p>
+            <div className="text-xl md:text-2xl font-black">{products.length} / {products.length}</div>
+            <p className="text-[10px] text-muted-foreground">{isLive ? "Yayında" : "Kapalı"}</p>
           </CardContent>
         </Card>
       </div>
 
       {/* ANA PANEL */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
         {/* YAYIN AKIŞI */}
         <Card className="lg:col-span-2 glass-panel border-border/50">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Zap className="h-5 w-5 text-yellow-400" /> Yayın Akışı
             </CardTitle>
-            <CardDescription>Sıradaki ürünü seç ve butona bas.</CardDescription>
+            <CardDescription>Sıradaki ürünü seç ve yayına ver.</CardDescription>
           </CardHeader>
+
           <CardContent>
-            <div className="space-y-4">
-              {products.map((product) => (
-                <div 
-                  key={product.id} 
-                  className={`flex items-center justify-between p-3 md:p-4 rounded-xl border transition-all ${
-                    activeProductId === product.id 
-                    ? "bg-primary/10 border-primary shadow-[0_0_15px_rgba(168,85,247,0.2)] scale-[1.01]" 
-                    : "bg-card/30 border-transparent hover:bg-card/50"
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl md:text-3xl filter drop-shadow-md">{product.img}</span>
-                    <div>
-                      <h4 className="font-bold text-sm md:text-lg">{product.name}</h4>
-                      <p className="text-xs md:text-sm text-muted-foreground">${product.price}</p>
+            {productsQ.isLoading && <p className="text-muted-foreground">Products loading...</p>}
+            {productsQ.isError && (
+              <p className="text-red-500">Products error: {(productsQ.error as any).message}</p>
+            )}
+
+            {!productsQ.isLoading && !productsQ.isError && (
+              <div className="space-y-4">
+                {products.map((p) => (
+                  <div
+                    key={p.product_id}
+                    className={`flex items-center justify-between p-3 md:p-4 rounded-xl border transition-all ${
+                      activeProductId === p.product_id
+                        ? "bg-primary/10 border-primary shadow-[0_0_15px_rgba(168,85,247,0.2)] scale-[1.01]"
+                        : "bg-card/30 border-transparent hover:bg-card/50"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl md:text-3xl filter drop-shadow-md">📦</span>
+                      <div>
+                        <h4 className="font-bold text-sm md:text-lg">{p.name}</h4>
+                        <p className="text-xs md:text-sm text-muted-foreground">
+                          ₺{Number(p.price)} • Stock: {Number(p.stock_quantity)}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      {Number(p.stock_quantity) <= 0 ? (
+                        <Badge variant="secondary" className="bg-gray-800 text-gray-400">
+                          STOK YOK
+                        </Badge>
+                      ) : activeProductId === p.product_id ? (
+                        <div className="flex items-center gap-2">
+                          <Badge className="bg-red-600 animate-pulse text-white border-none shadow-lg shadow-red-900/50 whitespace-nowrap">
+                            CANLI 🔴
+                          </Badge>
+
+                          <Button
+                            size="sm"
+                            className="font-bold"
+                            disabled={!isLive || !liveSaleId || claimM.isPending}
+                            onClick={() => {
+                              if (!liveSaleId) return toast.error("Önce live başlat");
+                              claimM.mutate({ live_sale_id: liveSaleId, product_id: p.product_id });
+                            }}
+                          >
+                            CLAIM TEST
+                          </Button>
+                        </div>
+                      ) : (
+                        <Button
+                          disabled={!isLive}
+                          onClick={() => pushToLive(p.product_id)}
+                          size="sm"
+                          className={`font-bold transition-all shadow-md min-w-[120px] ${
+                            !isLive
+                              ? "bg-gray-700 text-gray-400 cursor-not-allowed"
+                              : "bg-[#1e3a8a] hover:bg-[#172554] text-white shadow-blue-900/50"
+                          }`}
+                        >
+                          YAYINA VER
+                        </Button>
+                      )}
                     </div>
                   </div>
+                ))}
+              </div>
+            )}
 
-                  <div className="flex items-center gap-2">
-                    {product.status === 'sold' ? (
-                      <Badge variant="secondary" className="bg-gray-800 text-gray-400">SATILDI</Badge>
-                    ) : activeProductId === product.id ? (
-                      <Badge className="bg-red-600 animate-pulse text-white border-none shadow-lg shadow-red-900/50 whitespace-nowrap">
-                        CANLI 🔴
-                      </Badge>
-                    ) : (
-                      // BURASI DÜZELTİLDİ: KOYU MAVİ BUTON
-                      <Button 
-                        disabled={!isLive} 
-                        onClick={() => pushToLive(product.id)}
-                        size="sm"
-                        className={`font-bold transition-all shadow-md min-w-[100px] ${
-                          !isLive 
-                          ? "bg-gray-700 text-gray-400 cursor-not-allowed" 
-                          : "bg-[#1e3a8a] hover:bg-[#172554] text-white shadow-blue-900/50"
-                        }`}
-                      >
-                        YAYINA VER
-                      </Button>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
+            {isLive && liveSaleId && activeProduct && (
+              <p className="text-xs text-muted-foreground mt-4">
+                Seçili ürün: <span className="font-semibold">{activeProduct.name}</span>
+              </p>
+            )}
           </CardContent>
         </Card>
 
@@ -179,36 +255,49 @@ export default function Automation() {
             <CardTitle className="flex items-center gap-2 text-red-400">
               <Ban className="h-5 w-5" /> Moderasyon
             </CardTitle>
-            <CardDescription>Riskli mesajlar.</CardDescription>
+            <CardDescription>Riskli mesajlar (demo).</CardDescription>
           </CardHeader>
+
           <CardContent className="flex-1">
             <ScrollArea className="h-[400px] pr-4">
               <div className="space-y-3">
                 {chats.map((chat) => (
-                  <div key={chat.id} className={`flex flex-col gap-2 p-3 rounded-lg border transition-all ${chat.isBanned ? "bg-red-900/10 border-red-900/30 opacity-70" : "bg-card/40 border-border/50"}`}>
+                  <div
+                    key={chat.id}
+                    className={`flex flex-col gap-2 p-3 rounded-lg border transition-all ${
+                      chat.isBanned ? "bg-red-900/10 border-red-900/30 opacity-70" : "bg-card/40 border-border/50"
+                    }`}
+                  >
                     <div className="flex justify-between items-start">
                       <div className="flex items-center gap-2">
                         <MessageSquare className="h-3 w-3 text-muted-foreground" />
-                        <span className={`font-bold text-sm ${chat.risk === 'high' ? 'text-red-400' : 'text-foreground'} ${chat.isBanned ? 'line-through' : ''}`}>
+                        <span
+                          className={`font-bold text-sm ${
+                            chat.risk === "high" ? "text-red-400" : "text-foreground"
+                          } ${chat.isBanned ? "line-through" : ""}`}
+                        >
                           {chat.user}
                         </span>
                       </div>
-                      {chat.risk === 'high' && !chat.isBanned && (
-                        <Badge variant="outline" className="border-red-500 text-red-500 text-[10px]">RİSKLİ</Badge>
+
+                      {chat.risk === "high" && !chat.isBanned && (
+                        <Badge variant="outline" className="border-red-500 text-red-500 text-[10px]">
+                          RİSKLİ
+                        </Badge>
                       )}
                     </div>
-                    
+
                     <p className="text-sm text-muted-foreground">{chat.msg}</p>
-                    
+
                     {chat.isBanned ? (
                       <div className="flex items-center justify-center gap-2 bg-red-900/20 text-red-500 text-xs font-bold py-2 rounded mt-2">
                         <CheckCircle2 className="w-3 h-3" /> BANLANDI 🚫
                       </div>
                     ) : (
-                      <Button 
+                      <Button
                         onClick={() => handleBan(chat.id)}
-                        variant="destructive" 
-                        size="sm" 
+                        variant="destructive"
+                        size="sm"
                         className="w-full mt-2 h-7 text-xs font-bold shadow-red-500/20 shadow-md"
                       >
                         ENGELLE
@@ -220,7 +309,6 @@ export default function Automation() {
             </ScrollArea>
           </CardContent>
         </Card>
-
       </div>
     </div>
   );

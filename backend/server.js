@@ -8,6 +8,10 @@ const fs = require('fs');
 // Kendi oluşturduğumuz dosyalar
 const db = require('./src/db'); 
 const aiRoutes = require('./src/integrations/ai/ai.routes'); 
+const ordersRoutes = require("./src/routes/orders.routes");
+const liveRoutes = require("./src/modules/live-sale/live.routes");
+const analyticsRoutes = require("./src/routes/analytics.routes");
+const productsRoutes = require("./src/routes/products.routes");
 
 const app = express();
 const PORT = process.env.PORT || 5002;
@@ -18,6 +22,10 @@ app.use(express.json());
 
 // AI Rotaları
 app.use('/ai', aiRoutes);
+app.use("/orders", ordersRoutes);
+app.use("/live", liveRoutes);
+app.use("/analytics", analyticsRoutes);
+app.use("/products", productsRoutes);
 
 // Uploads klasörü kontrolü
 const uploadDir = 'uploads';
