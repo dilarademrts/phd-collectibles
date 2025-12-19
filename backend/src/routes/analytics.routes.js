@@ -11,12 +11,13 @@ const db = require("../db");
 router.get("/kpis", async (req, res) => {
   try {
     const result = await db.query(`
-      SELECT
-        COALESCE(SUM(CASE WHEN o.status = 'completed' AND o.order_date::date = CURRENT_DATE THEN o.total_amount ELSE 0 END), 0) AS today_sales_total,
-        COALESCE(SUM(CASE WHEN o.status = 'completed' AND o.order_date::date = CURRENT_DATE THEN 1 ELSE 0 END), 0) AS completed_orders_today,
-        (SELECT COUNT(*) FROM product WHERE stock_quantity < 3) AS low_stock_count
-      FROM orders o;
-    `);
+  SELECT
+    COALESCE(SUM(CASE WHEN o.status = 'completed' AND o.order_date::date = CURRENT_DATE THEN o.total_amount ELSE 0 END), 0) AS today_sales_total,
+    COALESCE(SUM(CASE WHEN o.status = 'completed' AND o.order_date::date = CURRENT_DATE THEN 1 ELSE 0 END), 0) AS completed_orders_today,
+    (SELECT COUNT(*) FROM product WHERE stock_quantity BETWEEN 1 AND 3) AS low_stock_count,
+    (SELECT COUNT(*) FROM product WHERE stock_quantity = 0) AS out_of_stock_count
+  FROM orders o;
+`);
 
     res.json(result.rows[0]);
   } catch (err) {
