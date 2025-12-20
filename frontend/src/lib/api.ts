@@ -56,4 +56,6 @@ export const api = {
     }),
   claim: (payload: { live_sale_id: string; user: string; product_id: string }) =>
     json("/live/claim", { method: "POST", body: JSON.stringify(payload) }),
+
+  
 };
