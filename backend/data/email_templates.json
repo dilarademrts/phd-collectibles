@@ -1,0 +1,10 @@
+{
+  "low_stock_warning": {
+    "subject": "⚠️ DİKKAT: Stok Kritik Seviyede!",
+    "body": "Sayın Admin,\n\n'{product_name}' ürününün stoğu {current_stock} adede düşmüştür. Lütfen tedarik sürecini başlatınız.\n\nSistem Otomasyonu"
+  },
+  "invoice_ready": {
+    "subject": "✅ Siparişiniz Onaylandı - Faturanız Ekte",
+    "body": "Sayın {customer_name},\n\n#{order_id} numaralı siparişiniz başarıyla tamamlanmıştır. Faturanız bu mailin ekinde yer almaktadır.\n\nBizi tercih ettiğiniz için teşekkürler.\n\nPhD Collectibles Ekibi"
+  }
+}

@@ -2,6 +2,30 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db");
 const { generateInvoice } = require("../modules/invoices/invoice.service");
+const { sendMail } = require("../modules/notifications/mail.service");
+
+router.get("/summary", async (req, res) => {
+  try {
+    const result = await db.query(`
+      SELECT status, COUNT(*)::int AS count
+      FROM orders
+      GROUP BY status;
+    `);
+
+    // Frontend için sabit format
+    const map = { pending: 0, processing: 0, shipped: 0, delivered: 0, completed: 0 };
+
+    for (const row of result.rows) {
+      if (row.status in map) map[row.status] = Number(row.count);
+      else map[row.status] = Number(row.count);
+    }
+
+    res.json(map);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // GET /orders  → admin sipariş listesi
 router.get("/", async (req, res) => {
@@ -15,6 +39,7 @@ router.get("/", async (req, res) => {
     res.status(500).json({ error: "Sunucu hatası" });
   }
 });
+
 
 // PATCH /orders/:id/complete → tamamla + fatura üret
 router.patch("/:id/complete", async (req, res) => {
@@ -60,6 +85,12 @@ router.patch("/:id/complete", async (req, res) => {
        VALUES ($1, $2, $3)`,
       [id, pdf.fileName, pdf.filePath]
     );
+    
+    await sendMail({
+      subject: `Invoice hazır: ${pdf.fileName}`,
+      text: `Order ${id} tamamlandı. Fatura hazır: ${pdf.fileName}`
+    });
+
 
     await client.query("COMMIT");
 
