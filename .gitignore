@@ -3,3 +3,20 @@ dist
 .env
 .env.*
 .DS_Store
+
+# Gereksiz Sistem Dosyaları
+.DS_Store
+
+# Node.js Kütüphaneleri (Backend)
+node_modules/
+backend/node_modules/
+
+# Python Sanal Ortam ve Kütüphaneler (AI Service)
+venv/
+ai-service/venv/
+__pycache__/
+*.pyc
+
+# Çıktı dosyaları (İstersen bunları da yoksayabilirsin ama sunum için kalsınlar)
+# *.pdf
+# *.log
