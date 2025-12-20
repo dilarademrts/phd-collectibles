@@ -71,8 +71,8 @@ router.patch("/:id/complete", async (req, res) => {
     const itemsRes = await client.query(
       `SELECT p.name, oi.quantity, oi.unit_price
        FROM order_item oi
-       JOIN product p ON p.product_id = oi.product_id
-       WHERE oi.order_id = $1`,
+       JOIN product p ON p.id::text = oi.product_id::text 
+       WHERE oi.order_id::text = $1::text`,
       [id]
     );
 
