@@ -1,9 +1,18 @@
+// src/routes/orders.routes.js
 const express = require("express");
+const path = require("path");
 const router = express.Router();
+
+// DİKKAT: Bu dosya src/routes altında ise db yolu genelde ../db olur.
+// Sende server.js -> require("./src/db") kullandığı için burada ../db mantıklı.
 const db = require("../db");
+
+// Bunların gerçek yolunu projendeki klasörlere göre ayarla.
+// (Senin dosyada "./modules/..." yazıyordu ama routes klasöründen bakınca genelde "../modules/..." olur.)
 const { generateInvoice } = require("../modules/invoices/invoice.service");
 const { sendMail } = require("../modules/notifications/mail.service");
 
+// GET /orders/summary
 router.get("/summary", async (req, res) => {
   try {
     const result = await db.query(`
@@ -12,13 +21,8 @@ router.get("/summary", async (req, res) => {
       GROUP BY status;
     `);
 
-    // Frontend için sabit format
     const map = { pending: 0, processing: 0, shipped: 0, delivered: 0, completed: 0 };
-
-    for (const row of result.rows) {
-      if (row.status in map) map[row.status] = Number(row.count);
-      else map[row.status] = Number(row.count);
-    }
+    for (const row of result.rows) map[row.status] = Number(row.count);
 
     res.json(map);
   } catch (err) {
@@ -27,15 +31,12 @@ router.get("/summary", async (req, res) => {
   }
 });
 
-// GET /orders  → admin sipariş listesi
+// GET /orders
 router.get("/", async (req, res) => {
   try {
     const result = await db.query(
-  // 1. id'yi "order_id" olarak al
-  // 2. created_at'i "order_date" olarak al (Frontend bozulmasın diye)
-  // 3. Sıralamayı da gerçek sütun ismi olan "created_at"e göre yap
-  "SELECT id AS order_id, status, total_amount, created_at AS order_date FROM orders ORDER BY created_at DESC"
-);
+      "SELECT order_id, status, total_amount, order_date FROM orders ORDER BY order_date DESC"
+    );
     res.json(result.rows);
   } catch (err) {
     console.error(err);
@@ -43,8 +44,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-
-// PATCH /orders/:id/complete → tamamla + fatura üret
+// PATCH /orders/:id/complete
 router.patch("/:id/complete", async (req, res) => {
   const { id } = req.params;
   const client = await db.pool.connect();
@@ -52,13 +52,10 @@ router.patch("/:id/complete", async (req, res) => {
   try {
     await client.query("BEGIN");
 
-    // 1️⃣ Order'ı completed yap
     const orderRes = await client.query(
-  // 1. WHERE kısmında gerçek isim "id" kullanılır.
-  // 2. RETURNING kısmında frontend için eski isimler "AS" ile geri verilir.
-  "UPDATE orders SET status='completed' WHERE id=$1 RETURNING id AS order_id, created_at AS order_date, total_amount",
-  [id]
-);
+      "UPDATE orders SET status='completed' WHERE order_id=$1 RETURNING order_id, order_date, total_amount",
+      [id]
+    );
 
     if (orderRes.rowCount === 0) {
       await client.query("ROLLBACK");
@@ -67,43 +64,49 @@ router.patch("/:id/complete", async (req, res) => {
 
     const order = orderRes.rows[0];
 
-    // 2️⃣ Item'ları çek
     const itemsRes = await client.query(
       `SELECT p.name, oi.quantity, oi.unit_price
        FROM order_item oi
-       JOIN product p ON p.id::text = oi.product_id::text 
-       WHERE oi.order_id::text = $1::text`,
+       JOIN product p ON p.product_id = oi.product_id
+       WHERE oi.order_id = $1`,
       [id]
     );
 
     const fullOrder = {
       ...order,
-      items: itemsRes.rows
+      items: itemsRes.rows,
     };
 
-    // 3️⃣ PDF üret
     const pdf = await generateInvoice(fullOrder);
 
-    // 4️⃣ Invoice DB kaydı
     await client.query(
       `INSERT INTO invoices (order_id, file_name, file_path)
        VALUES ($1, $2, $3)`,
       [id, pdf.fileName, pdf.filePath]
     );
-    
-    await sendMail({
-      subject: `Invoice hazır: ${pdf.fileName}`,
-      text: `Order ${id} tamamlandı. Fatura hazır: ${pdf.fileName}`
-    });
 
+    // Mail opsiyonel: env yoksa crash olmasın
+    if (process.env.ADMIN_EMAIL) {
+      await sendMail({
+        to: process.env.ADMIN_EMAIL,
+        subject: `Invoice hazır: ${pdf.fileName}`,
+        text: `Order ${order.order_id} tamamlandı. Fatura ektedir.`,
+        attachments: [
+          {
+            filename: pdf.fileName,
+            path: pdf.filePath,
+            contentType: "application/pdf",
+          },
+        ],
+      });
+    }
 
     await client.query("COMMIT");
 
     res.json({
       message: "Sipariş tamamlandı, fatura oluşturuldu",
-      invoice: pdf
+      invoice: pdf,
     });
-
   } catch (err) {
     await client.query("ROLLBACK");
     console.error(err);
@@ -113,8 +116,7 @@ router.patch("/:id/complete", async (req, res) => {
   }
 });
 
-const path = require("path");
-
+// GET /orders/:id/invoice
 router.get("/:id/invoice", async (req, res) => {
   const { id } = req.params;
 
@@ -130,7 +132,7 @@ router.get("/:id/invoice", async (req, res) => {
 
     const { file_path, file_name } = invRes.rows[0];
 
-    // Güvenli kontrol (opsiyonel ama iyi)
+    // Basit güvenlik kontrolü (istersen kaldır)
     if (!file_path.includes(path.join("backend", "invoices")) && !file_path.includes("\\backend\\invoices")) {
       return res.status(400).json({ error: "Geçersiz fatura yolu" });
     }
@@ -141,6 +143,5 @@ router.get("/:id/invoice", async (req, res) => {
     res.status(500).json({ error: "Sunucu hatası" });
   }
 });
-
 
 module.exports = router;

@@ -1,0 +1,53 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: phd_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+
+  backend:
+    build: ./backend
+    container_name: phd_backend
+    environment:
+      PORT: 5001
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: 12345
+      DB_NAME: postgres
+    depends_on:
+      - db
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    env_file:
+      - ./backend/.env
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+
+  frontend:
+    build: ./frontend
+    container_name: phd_frontend
+    depends_on:
+      - backend
+    ports:
+      - "8080:8080"
+    environment:
+      VITE_API_URL: http://localhost:5001
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      
+
+volumes:
+  db_data:

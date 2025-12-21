@@ -5,8 +5,8 @@ const db = require("../db");
 router.get("/", async (req, res) => {
   try {
     const r = await db.query(
-    "SELECT id AS product_id, name, price, stock_quantity FROM product ORDER BY name ASC"
-);
+    "SELECT product_id, name, price, stock_quantity FROM product ORDER BY name ASC"
+    );
 
     res.json(r.rows);
   } catch (e) {

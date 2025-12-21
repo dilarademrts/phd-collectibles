@@ -94,13 +94,21 @@ router.post("/claim", async (req, res) => {
 
     const remaining = stockCheck.rows[0].stock_quantity;
 
-    if (remaining < 3) {
-      await sendMail({
-        subject: `Low Stock Uyarısı: ${product.name}`,
-        text: `${product.name} stoğu ${remaining} oldu.`
-      });
-    }
-
+    // live.routes.js içinde:
+if (remaining < 3 && process.env.ADMIN_EMAIL) {
+  await sendMail({
+    to: process.env.ADMIN_EMAIL,
+    subject: `Low Stock Uyarısı: ${product.name}`,
+    text: `${product.name} stoğu ${remaining} oldu.`
+  });
+}
+else if (remaining == 3 && process.env.ADMIN_EMAIL) {
+  await sendMail({
+    to: process.env.ADMIN_EMAIL,
+    subject: `No Stock Uyarısı: ${product.name}`,
+    text: `${product.name} stoğu tukendi.`
+  });
+}
 
     // 3) Order oluştur (admin-only: user_id NULL olabilir)
     const orderRes = await client.query(

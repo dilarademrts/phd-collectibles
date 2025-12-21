@@ -24,9 +24,12 @@ export default function Automation() {
 
   // ✅ DB ürünleri
   const productsQ = useQuery({
-    queryKey: ["products"],
-    queryFn: api.products,
-  });
+  queryKey: ["products"],
+  queryFn: api.products,
+  refetchInterval: 2000,            // 2 saniyede bir yenile
+  refetchOnWindowFocus: true,
+});
+
 
   const products = productsQ.data ?? [];
 
