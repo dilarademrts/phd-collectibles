@@ -30,7 +30,20 @@ export const api = {
   ordersSummary: () => json<Record<string, number>>("/orders/summary"),
 
   // products
-  products: () => json<Array<{ product_id: string; name: string; price: any; stock_quantity: any }>>("/products"),
+  products: () =>
+  json<
+    Array<{
+      product_id: string;
+      name: string;
+      description: string | null;
+      price: any;
+      stock_quantity: any;
+      image_url: string | null;
+      category_id: string | null;
+      category: string | null;
+    }>
+  >("/products"),
+
 
 
   // invoices download
@@ -56,6 +69,19 @@ export const api = {
     }),
   claim: (payload: { live_sale_id: string; user: string; product_id: string }) =>
     json("/live/claim", { method: "POST", body: JSON.stringify(payload) }),
+
+  // update product
+updateProduct: (id: string, payload: any) =>
+  json(`/products/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(payload),
+  }),
+
+// delete product
+deleteProduct: (id: string) =>
+  json(`/products/${id}`, {
+    method: "DELETE",
+  }),
 
   
 };
