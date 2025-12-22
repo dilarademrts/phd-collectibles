@@ -1,42 +1,1002 @@
 [
-  {
-    "category": "Action Figures",
-    "items": [
-      { "name": "Batman The Dark Knight - 1/6 Scale", "description": "Detaylı Batman figürü.", "price": 4500, "stock": 2, "image_url": "https://via.placeholder.com/150", "note": "LOW STOCK" },
-      { "name": "Joker - Heath Ledger Edition", "description": "Efsanevi Joker figürü.", "price": 4200, "stock": 15, "image_url": "https://via.placeholder.com/150", "note": "PAIR TARGET" },
-      { "name": "Iron Man Mark 85 Diecast", "description": "Metal alaşımlı.", "price": 8500, "stock": 0, "image_url": "https://via.placeholder.com/150", "note": "SOLD OUT" },
-      { "name": "Captain America - Endgame", "description": "Mjolnir dahil.", "price": 5000, "stock": 8, "image_url": "https://via.placeholder.com/150" },
-      { "name": "Thor - Fat Thor Version", "description": "Özel göbekli versiyon.", "price": 4800, "stock": 12, "image_url": "https://via.placeholder.com/150" }
-    ]
-  },
-  {
-    "category": "Comics",
-    "items": [
-      { "name": "Amazing Spider-Man #300", "description": "Venom ilk görünüm.", "price": 1200, "stock": 50, "image_url": "https://via.placeholder.com/150" },
-      { "name": "Watchmen Deluxe Edition", "description": "Hardcover.", "price": 800, "stock": 4, "image_url": "https://via.placeholder.com/150" },
-      { "name": "The Killing Joke - First Print", "description": "Joker orijin hikayesi.", "price": 1500, "stock": 6, "image_url": "https://via.placeholder.com/150", "note": "PAIR WITH BATMAN" },
-      { "name": "Sandman Vol 1", "description": "Neil Gaiman.", "price": 600, "stock": 20, "image_url": "https://via.placeholder.com/150" }
-    ]
-  },
-  {
-    "category": "Statues",
-    "items": [
-      { "name": "Darth Vader Premium Format", "description": "70cm heykel.", "price": 25000, "stock": 1, "image_url": "https://via.placeholder.com/150" },
-      { "name": "Gandalf the Grey", "description": "Yüzüklerin Efendisi.", "price": 18000, "stock": 3, "image_url": "https://via.placeholder.com/150" }
-    ]
-  },
-  {
-    "category": "Prop Replicas",
-    "items": [
-      { "name": "Harry Potter Wand", "description": "Orijinal asa.", "price": 900, "stock": 100, "image_url": "https://via.placeholder.com/150" },
-      { "name": "Batarang Replica", "description": "Metal fırlatma diski.", "price": 1500, "stock": 5, "image_url": "https://via.placeholder.com/150" }
-    ]
-  },
-  {
-    "category": "Apparel",
-    "items": [
-      { "name": "Stark Industries T-Shirt", "description": "Pamuklu tişört.", "price": 400, "stock": 60, "image_url": "https://via.placeholder.com/150" },
-      { "name": "Wayne Enterprises Hoodie", "description": "Siyah kapüşonlu.", "price": 1200, "stock": 40, "image_url": "https://via.placeholder.com/150" }
-    ]
-  }
+    {
+        "id": 1,
+        "name": "ACTION COMICS #1056 SDCC 2023 Inhyuk Lee FOIL Homage Variant",
+        "price": 0.0,
+        "price_formatted": "%25\n\n                                        1.728,89 TL\n                                    \n\n                                    1.296,66 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/004/s-l1600-1.jpg?revision=1739284025",
+        "url": "https://www.phdcollectibles.com/urun/action-comics-1056-sdcc-2023-inhyuk-lee-foil-homage-variant",
+        "stock": 0,
+        "description": "ACTION COMICS #1056 SDCC 2023 Inhyuk Lee FOIL Homage Variant koleksiyon ürünü."
+    },
+    {
+        "id": 2,
+        "name": "Batman #128 Tiago Da Silva Exclusive NYCC Edition 800 Limited",
+        "price": 1728.89,
+        "price_formatted": "1.728,89 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/007/large-8941629.jpg?revision=1712657687",
+        "url": "https://www.phdcollectibles.com/urun/batman-128-tiago-da-silva-exclusive-nycc-edition-800-limited",
+        "stock": 40,
+        "description": "Batman #128 Tiago Da Silva Exclusive NYCC Edition 800 Limited koleksiyon ürünü."
+    },
+    {
+        "id": 3,
+        "name": "Batman 89 #1 Warren Louw Exclusive Variant",
+        "price": 1296.66,
+        "price_formatted": "1.296,66 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/009/batman89-530x-2x.jpg?revision=1712659403",
+        "url": "https://www.phdcollectibles.com/urun/batman-89-1-warren-louw-exclusive-variant",
+        "stock": 22,
+        "description": "Batman 89 #1 Warren Louw Exclusive Variant koleksiyon ürünü."
+    },
+    {
+        "id": 4,
+        "name": "Batman / Catwoman #1  Warren Louw Exclusive Variant",
+        "price": 1512.77,
+        "price_formatted": "1.512,77 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/011/large-9439569.jpg?revision=1712659632",
+        "url": "https://www.phdcollectibles.com/urun/batman-catwoman-1-warren-louw-exclusive-variant",
+        "stock": 33,
+        "description": "Batman / Catwoman #1  Warren Louw Exclusive Variant koleksiyon ürünü."
+    },
+    {
+        "id": 5,
+        "name": "Batman Catwoman #1 Gabriele Dell'Otto Exclusive Team Variant",
+        "price": 864.44,
+        "price_formatted": "864,44 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/012/9d9fa9-af9f6159fb1a4088b9f5b6e9aadf53f2-mv2.png?revision=1740315827",
+        "url": "https://www.phdcollectibles.com/urun/batman-catwoman-1-gabriele-dell-otto-exclusive-team-variant",
+        "stock": 39,
+        "description": "Batman Catwoman #1 Gabriele Dell'Otto Exclusive Team Variant koleksiyon ürünü."
+    },
+    {
+        "id": 6,
+        "name": "Batman Superman World's Finest #1 Nathan Szerdy Exclusive Trade Variant",
+        "price": 648.33,
+        "price_formatted": "648,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/014/7-ate-9-comics-comic-trade-dress-batman-superman-world-s-finest-1-nathan-szerdy-variants-cover-options-36785698570466.jpg?revision=1739740382",
+        "url": "https://www.phdcollectibles.com/urun/batman-superman-world-s-finest-1-nathan-szerdy-exclusive-covers",
+        "stock": 23,
+        "description": "Batman Superman World's Finest #1 Nathan Szerdy Exclusive Trade Variant koleksiyon ürünü."
+    },
+    {
+        "id": 7,
+        "name": "BRZRKR #1 DİEGO GALİNDO EXCLUSİVE COVER",
+        "price": 0.0,
+        "price_formatted": "%50\n\n                                        3.673,88 TL\n                                    \n\n                                    1.836,94 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/015/medium-7827631.jpg?revision=1763844812",
+        "url": "https://www.phdcollectibles.com/urun/brzrkr-1-diego-galindo-exclusive-cover",
+        "stock": 0,
+        "description": "BRZRKR #1 DİEGO GALİNDO EXCLUSİVE COVER koleksiyon ürünü."
+    },
+    {
+        "id": 8,
+        "name": "Boys #1 Miguel Mercado Exclusive Cover + CoA",
+        "price": 1512.77,
+        "price_formatted": "1.512,77 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/017/1-c7bc6a0a-3811-44e8-ab05-28734014c43c.jpg?revision=1723478171",
+        "url": "https://www.phdcollectibles.com/urun/boys-1-miguel-mercado-exclusive-cover-coa",
+        "stock": 23,
+        "description": "Boys #1 Miguel Mercado Exclusive Cover + CoA koleksiyon ürünü."
+    },
+    {
+        "id": 9,
+        "name": "CARNAGE #1 KAARE ANDREWS 90s Exclusive Variants",
+        "price": 648.33,
+        "price_formatted": "648,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/018/4a71e7cd-1d5d-4d36-8cf9-ed87d9457091-1024x1024-2x.jpg?revision=1745318441",
+        "url": "https://www.phdcollectibles.com/urun/carnage-1-kaare-andrews-90s-exclusive-variants",
+        "stock": 6,
+        "description": "CARNAGE #1 KAARE ANDREWS 90s Exclusive Variants koleksiyon ürünü."
+    },
+    {
+        "id": 10,
+        "name": "Daredevil #29 David Nakayama Exclusive Cover Trade Dress",
+        "price": 648.33,
+        "price_formatted": "648,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/022/daredevil29nakayamatrade-530x-2x.jpg?revision=1740336439",
+        "url": "https://www.phdcollectibles.com/urun/daredevil-29-david-nakayama-exclusive-cover-trade-dress",
+        "stock": 47,
+        "description": "Daredevil #29 David Nakayama Exclusive Cover Trade Dress koleksiyon ürünü."
+    },
+    {
+        "id": 11,
+        "name": "Daredevil #1 Gabriele Dell Otto Exclusive Variant Trade Dress",
+        "price": 994.11,
+        "price_formatted": "994,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/024/s-l1200-1-1.jpg?revision=1743256386",
+        "url": "https://www.phdcollectibles.com/urun/daredevil-1-gabriele-dell-otto-exclusive-variant-trade-dress",
+        "stock": 41,
+        "description": "Daredevil #1 Gabriele Dell Otto Exclusive Variant Trade Dress koleksiyon ürünü."
+    },
+    {
+        "id": 12,
+        "name": "Dark Crisis #1 Gabriele Dell Otto Exclusive Cover",
+        "price": 648.33,
+        "price_formatted": "648,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/025/s-l1600-2.jpg?revision=1748599829",
+        "url": "https://www.phdcollectibles.com/urun/dark-crisis-1-gabriele-dell-otto-exclusive-cover",
+        "stock": 22,
+        "description": "Dark Crisis #1 Gabriele Dell Otto Exclusive Cover koleksiyon ürünü."
+    },
+    {
+        "id": 13,
+        "name": "Darkstalkers #1 Morrigan Ariel Diaz Exclusive Variant + CoA + Mylar",
+        "price": 2161.11,
+        "price_formatted": "2.161,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/027/274526965-4782884028498969-2430224507836844707-n.jpg?revision=1712666324",
+        "url": "https://www.phdcollectibles.com/urun/darkstalkers-1-morrigan-ariel-diaz-exclusive-variant-coa-mylar",
+        "stock": 49,
+        "description": "Darkstalkers #1 Morrigan Ariel Diaz Exclusive Variant + CoA + Mylar koleksiyon ürünü."
+    },
+    {
+        "id": 14,
+        "name": "DEPARTMENT OF TRUTH #10 WARREN LOUW EXCLUSİVE VARİANT",
+        "price": 0.0,
+        "price_formatted": "%30\n\n                                        1.711,77 TL\n                                    \n\n                                    1.198,24 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/030/denc9vw-69a0b7b8-acbf-4246-9191-3b9a9a6a09bc.png?revision=1763844792",
+        "url": "https://www.phdcollectibles.com/urun/department-of-truth-10-warren-louw-exclusive-variant",
+        "stock": 0,
+        "description": "DEPARTMENT OF TRUTH #10 WARREN LOUW EXCLUSİVE VARİANT koleksiyon ürünü."
+    },
+    {
+        "id": 15,
+        "name": "Harley Quinn #14 Warren Louw Exclusive Cover Trade Dress",
+        "price": 864.44,
+        "price_formatted": "864,44 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/031/7-ate-9-comics-comic-trade-dress-harley-quinn-13-warren-louw-variants-cover-options-37043806601442.jpg?revision=1713433364",
+        "url": "https://www.phdcollectibles.com/urun/harley-quinn-14-warren-louw-exclusive-cover-trade-dress",
+        "stock": 13,
+        "description": "Harley Quinn #14 Warren Louw Exclusive Cover Trade Dress koleksiyon ürünü."
+    },
+    {
+        "id": 16,
+        "name": "Harley Quinn #15 Natali Sanders Exclusive Variant Trade Dress",
+        "price": 0.0,
+        "price_formatted": "%25\n\n                                        864,44 TL\n                                    \n\n                                    648,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/032/7-ate-9-comics-comic-harley-quinn-15-natali-sanders-variant-cover-38579749814498.jpg?revision=1713433488",
+        "url": "https://www.phdcollectibles.com/urun/harley-quinn-15-natali-sanders-exclusive-variant-trade-dress",
+        "stock": 0,
+        "description": "Harley Quinn #15 Natali Sanders Exclusive Variant Trade Dress koleksiyon ürünü."
+    },
+    {
+        "id": 17,
+        "name": "Harley Quinn #16 Sozomaika Exclusive Virgin Variant",
+        "price": 1512.77,
+        "price_formatted": "1.512,77 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/033/harley16.jpg?revision=1713433621",
+        "url": "https://www.phdcollectibles.com/urun/harley-quinn-16-sozomaika-exclusive-virgin-variant",
+        "stock": 24,
+        "description": "Harley Quinn #16 Sozomaika Exclusive Virgin Variant koleksiyon ürünü."
+    },
+    {
+        "id": 18,
+        "name": "Harley Quinn: Black, White & Redder #1 SDCC 2023 FOIL Logo Variant Cover",
+        "price": 0.0,
+        "price_formatted": "%50\n\n                                        1.728,89 TL\n                                    \n\n                                    864,44 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/034/sdcc-harley-quinn-logo-foil-virgin.jpg?revision=1713435006",
+        "url": "https://www.phdcollectibles.com/urun/harley-quinn-black-white-redder-1-sdcc-2023-foil-logo-variant-cover",
+        "stock": 0,
+        "description": "Harley Quinn: Black, White & Redder #1 SDCC 2023 FOIL Logo Variant Cover koleksiyon ürünü."
+    },
+    {
+        "id": 19,
+        "name": "House of Slaughter #1 Alan Quah Trade Dress Variant",
+        "price": 950.89,
+        "price_formatted": "950,89 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/035/7-ate-9-comics-comic-trade-dress-house-of-slaughter-1-alan-quah-variants-cover-options-30951143276694.jpg?revision=1745318411",
+        "url": "https://www.phdcollectibles.com/urun/house-of-slaughter-1-alan-quah-trade-dress-variant",
+        "stock": 14,
+        "description": "House of Slaughter #1 Alan Quah Trade Dress Variant koleksiyon ürünü."
+    },
+    {
+        "id": 20,
+        "name": "House of Slaughter #1 Kyle Hotz Exclusive Variant Set",
+        "price": 1945.0,
+        "price_formatted": "1.945,00 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/036/7-ate-9-comics-comic-house-of-slaughter-1-kyle-hotz-variant-set-30937981681814.jpg?revision=1723191930",
+        "url": "https://www.phdcollectibles.com/urun/house-of-slaughter-1-kyle-hotz-exclusive-variant-set",
+        "stock": 46,
+        "description": "House of Slaughter #1 Kyle Hotz Exclusive Variant Set koleksiyon ürünü."
+    },
+    {
+        "id": 21,
+        "name": "Miles Morales #29 Mike Mayhew Sneaker Collection Variant",
+        "price": 2161.11,
+        "price_formatted": "2.161,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/037/mmsm2018029-dc31-540x.jpg?revision=1745147377",
+        "url": "https://www.phdcollectibles.com/urun/miles-morales-29-mike-mayhew-sneaker-collection-variant",
+        "stock": 24,
+        "description": "Miles Morales #29 Mike Mayhew Sneaker Collection Variant koleksiyon ürünü."
+    },
+    {
+        "id": 22,
+        "name": "Moon Knight: Black, White & Red #1 Gabriele Dell Otto Exclusive Variant Trade Dress",
+        "price": 950.89,
+        "price_formatted": "950,89 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/038/7-ate-9-comics-comic-trade-dress-devil-s-reign-moon-knight-1-gabriele-dell-otto-variants-cover-options-36888435327202.jpg?revision=1743855743",
+        "url": "https://www.phdcollectibles.com/urun/moon-knight-black-white-red-1-gabriele-dell-otto-exclusive-variant-trade-dress",
+        "stock": 22,
+        "description": "Moon Knight: Black, White & Red #1 Gabriele Dell Otto Exclusive Variant Trade Dress koleksiyon ürünü."
+    },
+    {
+        "id": 23,
+        "name": "Power Girl Special #1 : Will Jack Exclusive Variant Opt.",
+        "price": 1512.77,
+        "price_formatted": "1.512,77 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/039/power-girl-1-will-jack-trade-1.jpg?revision=1723192824",
+        "url": "https://www.phdcollectibles.com/urun/power-girl-special-1-will-jack-exclusive-variant-opt",
+        "stock": 47,
+        "description": "Power Girl Special #1 : Will Jack Exclusive Variant Opt. koleksiyon ürünü."
+    },
+    {
+        "id": 24,
+        "name": "Punchline The Gotham Game #2: Ivan Tao Exclusive Variant Opt.",
+        "price": 950.89,
+        "price_formatted": "950,89 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/043/puchline.jpg?revision=1745924030",
+        "url": "https://www.phdcollectibles.com/urun/punchline-the-gotham-game-2-ivan-tao-exclusive-variant-opt",
+        "stock": 36,
+        "description": "Punchline The Gotham Game #2: Ivan Tao Exclusive Variant Opt. koleksiyon ürünü."
+    },
+    {
+        "id": 25,
+        "name": "Savage Red Sonja #1  Ivan Tao Exclusive Variant Opt.",
+        "price": 0.0,
+        "price_formatted": "%40\n\n                                        950,89 TL\n                                    \n\n                                    570,53 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/046/c758566d-c159-4c40-ba48-4a7f2b8d34de-1024x1024-2x.jpg?revision=1764700965",
+        "url": "https://www.phdcollectibles.com/urun/savage-red-sonja-1-ivan-tao-exclusive-variant-opt",
+        "stock": 0,
+        "description": "Savage Red Sonja #1  Ivan Tao Exclusive Variant Opt. koleksiyon ürünü."
+    },
+    {
+        "id": 26,
+        "name": "Rick and Morty Presents: The Hericktics of Rick #1 John Gallagher Exclusive Variant",
+        "price": 950.89,
+        "price_formatted": "950,89 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/049/large-2368202.jpg?revision=1748861508",
+        "url": "https://www.phdcollectibles.com/urun/rick-and-morty-presents-the-hericktics-of-rick-1-john-gallagher-exclusive-variant",
+        "stock": 22,
+        "description": "Rick and Morty Presents: The Hericktics of Rick #1 John Gallagher Exclusive Variant koleksiyon ürünü."
+    },
+    {
+        "id": 27,
+        "name": "Locke & Key / The Sandman Universe: Hell & Gone #1 Peach Momoko Variant",
+        "price": 2593.33,
+        "price_formatted": "2.593,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/051/large-4587286.jpg?revision=1726877254",
+        "url": "https://www.phdcollectibles.com/urun/locke-key-the-sandman-universe-hell-gone-1-peach-momoko-variant",
+        "stock": 10,
+        "description": "Locke & Key / The Sandman Universe: Hell & Gone #1 Peach Momoko Variant koleksiyon ürünü."
+    },
+    {
+        "id": 28,
+        "name": "Locke & Key / The Sandman Universe: Hell & Gone #1 Scorpion Comics Peach Momoko Variant",
+        "price": 950.89,
+        "price_formatted": "950,89 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/052/large-1404086.jpg?revision=1726877238",
+        "url": "https://www.phdcollectibles.com/urun/locke-key-the-sandman-universe-hell-gone-1-scorpion-comics-peach-momoko-variant",
+        "stock": 34,
+        "description": "Locke & Key / The Sandman Universe: Hell & Gone #1 Scorpion Comics Peach Momoko Variant koleksiyon ürünü."
+    },
+    {
+        "id": 29,
+        "name": "Something is Killing the Children #25 Ariel Diaz Exclusive Spot Foil Variant",
+        "price": 2139.71,
+        "price_formatted": "2.139,71 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/053/large-2357845-1.jpg?revision=1739284878",
+        "url": "https://www.phdcollectibles.com/urun/something-is-killing-the-children-25-ariel-diaz-exclusive-spot-foil-variant",
+        "stock": 32,
+        "description": "Something is Killing the Children #25 Ariel Diaz Exclusive Spot Foil Variant koleksiyon ürünü."
+    },
+    {
+        "id": 30,
+        "name": "SOMETHİNG İS KİLLİNG THE CHİLDREN #21 LUCİO PARİLLO EXCLUSİVE COVER OPT.",
+        "price": 1728.89,
+        "price_formatted": "1.728,89 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/054/image-1.png?revision=1763844552",
+        "url": "https://www.phdcollectibles.com/urun/something-is-killing-the-children-21-lucio-parillo-exclusive-cover-opt",
+        "stock": 20,
+        "description": "SOMETHİNG İS KİLLİNG THE CHİLDREN #21 LUCİO PARİLLO EXCLUSİVE COVER OPT. koleksiyon ürünü."
+    },
+    {
+        "id": 31,
+        "name": "The Amazing Spider-Man #1 Gabriele Dell Otto Exclusive Variant Opt.",
+        "price": 1296.66,
+        "price_formatted": "1.296,66 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/057/ekran-alintisi.jpg?revision=1754737975",
+        "url": "https://www.phdcollectibles.com/urun/the-amazing-spider-man-1-gabriele-dell-otto-exclusive-variant-opt",
+        "stock": 28,
+        "description": "The Amazing Spider-Man #1 Gabriele Dell Otto Exclusive Variant Opt. koleksiyon ürünü."
+    },
+    {
+        "id": 32,
+        "name": "The Amazing Spider-Man #46 Peach Momoko Exclusive Trade Dress Variant",
+        "price": 648.33,
+        "price_formatted": "648,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/060/7-ate-9-comics-comic-trade-dress-the-amazing-spider-man-46-peach-momoko-variant-cover-options-17886753849494-1.jpg?revision=1713441596",
+        "url": "https://www.phdcollectibles.com/urun/the-amazing-spider-man-46-peach-momoko-exclusive-trade-dress-variant",
+        "stock": 48,
+        "description": "The Amazing Spider-Man #46 Peach Momoko Exclusive Trade Dress Variant koleksiyon ürünü."
+    },
+    {
+        "id": 33,
+        "name": "The Amazing Spider-Man #48 Gabriele Dell’Otto Exclusive Trade",
+        "price": 648.33,
+        "price_formatted": "648,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/061/large-5632376.jpg?revision=1725276666",
+        "url": "https://www.phdcollectibles.com/urun/the-amazing-spider-man-48-gabriele-dell-otto-exclusive-trade",
+        "stock": 33,
+        "description": "The Amazing Spider-Man #48 Gabriele Dell’Otto Exclusive Trade koleksiyon ürünü."
+    },
+    {
+        "id": 34,
+        "name": "The Amazing Spider-Man #61 Mike Mayhew Variant",
+        "price": 2161.11,
+        "price_formatted": "2.161,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/062/large-9454721.jpg?revision=1740335811",
+        "url": "https://www.phdcollectibles.com/urun/the-amazing-spider-man-61-mike-mayhew-variant",
+        "stock": 39,
+        "description": "The Amazing Spider-Man #61 Mike Mayhew Variant koleksiyon ürünü."
+    },
+    {
+        "id": 35,
+        "name": "The Amazing Spider-Man #75 – Mike Mayhew Exclusive Variant",
+        "price": 1296.66,
+        "price_formatted": "1.296,66 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/063/large-8245160.jpg?revision=1733135360",
+        "url": "https://www.phdcollectibles.com/urun/the-amazing-spider-man-75-mike-mayhew-exclusive-variant",
+        "stock": 50,
+        "description": "The Amazing Spider-Man #75 – Mike Mayhew Exclusive Variant koleksiyon ürünü."
+    },
+    {
+        "id": 36,
+        "name": "THE AMAZİNG SPİDER-MAN #88 – INHYUK LEE EXCLUSİVE VARİANT",
+        "price": 0.0,
+        "price_formatted": "%30\n\n                                        1.296,66 TL\n                                    \n\n                                    907,66 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/064/large-5555031.jpg?revision=1763844597",
+        "url": "https://www.phdcollectibles.com/urun/the-amazing-spider-man-88-inhyuk-lee-exclusive-variant",
+        "stock": 0,
+        "description": "THE AMAZİNG SPİDER-MAN #88 – INHYUK LEE EXCLUSİVE VARİANT koleksiyon ürünü."
+    },
+    {
+        "id": 37,
+        "name": "The Amazing Spider-Man #17 – John Giang Exclusive Variant",
+        "price": 2593.33,
+        "price_formatted": "2.593,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/065/large-2884253.jpg?revision=1740039110",
+        "url": "https://www.phdcollectibles.com/urun/the-amazing-spider-man-17-john-giang-exclusive-variant",
+        "stock": 13,
+        "description": "The Amazing Spider-Man #17 – John Giang Exclusive Variant koleksiyon ürünü."
+    },
+    {
+        "id": 38,
+        "name": "The Amazing Spider-Man #14 – Felipe Massafera Variant",
+        "price": 864.44,
+        "price_formatted": "864,44 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/066/large-5632987-1.jpg?revision=1725019057",
+        "url": "https://www.phdcollectibles.com/urun/the-amazing-spider-man-14-felipe-massafera-variant",
+        "stock": 16,
+        "description": "The Amazing Spider-Man #14 – Felipe Massafera Variant koleksiyon ürünü."
+    },
+    {
+        "id": 39,
+        "name": "The Amazing Spider-Man #26 – Warren Louw Exclusive Variant",
+        "price": 1080.55,
+        "price_formatted": "1.080,55 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/067/large-4707847.jpg?revision=1725556972",
+        "url": "https://www.phdcollectibles.com/urun/the-amazing-spider-man-26-warren-louw-exclusive-variant",
+        "stock": 30,
+        "description": "The Amazing Spider-Man #26 – Warren Louw Exclusive Variant koleksiyon ürünü."
+    },
+    {
+        "id": 40,
+        "name": "Spider-Man #7 – Romy Jones Exclusive 2nd Printing Virgin Variant",
+        "price": 1080.55,
+        "price_formatted": "1.080,55 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/068/large-5377486-1.jpg?revision=1713442342",
+        "url": "https://www.phdcollectibles.com/urun/spider-man-7-romy-jones-exclusive-2nd-printing-virgin-variant",
+        "stock": 21,
+        "description": "Spider-Man #7 – Romy Jones Exclusive 2nd Printing Virgin Variant koleksiyon ürünü."
+    },
+    {
+        "id": 41,
+        "name": "The Amazing Spider-Man #38 Derrick Chew Exclusive Cover Opt.",
+        "price": 1512.77,
+        "price_formatted": "1.512,77 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/069/large-7221417-1.jpg?revision=1756457356",
+        "url": "https://www.phdcollectibles.com/urun/the-amazing-spider-man-38-derrick-chew-exclusive-cover-opt",
+        "stock": 20,
+        "description": "The Amazing Spider-Man #38 Derrick Chew Exclusive Cover Opt. koleksiyon ürünü."
+    },
+    {
+        "id": 42,
+        "name": "Star Wars Mandalorian #2 Mike Mayhew Exclusive Variant Cover Opt.",
+        "price": 0.0,
+        "price_formatted": "%50\n\n                                        864,44 TL\n                                    \n\n                                    432,22 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/072/7-ate-9-comics-comic-star-wars-mandalorian-2-mike-mayhew-variant-cover-37646507737314-1.jpg?revision=1729193270",
+        "url": "https://www.phdcollectibles.com/urun/star-wars-mandalorian-2-mike-mayhew-exclusive-variant-cover-opt",
+        "stock": 0,
+        "description": "Star Wars Mandalorian #2 Mike Mayhew Exclusive Variant Cover Opt. koleksiyon ürünü."
+    },
+    {
+        "id": 43,
+        "name": "STAR WARS DOCTOR APHRA #30 EXCLUSİVE VARİANT + COA",
+        "price": 0.0,
+        "price_formatted": "%50\n\n                                        1.296,66 TL\n                                    \n\n                                    648,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/073/large-9994698-1.jpg?revision=1764701300",
+        "url": "https://www.phdcollectibles.com/urun/star-wars-doctor-aphra-30-exclusive-variant-coa",
+        "stock": 0,
+        "description": "STAR WARS DOCTOR APHRA #30 EXCLUSİVE VARİANT + COA koleksiyon ürünü."
+    },
+    {
+        "id": 44,
+        "name": "Star Wars: The High Republic #1 Aaron Kuder Variant",
+        "price": 10805.54,
+        "price_formatted": "10.805,54 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/074/large-5855481-1.jpg?revision=1713444681",
+        "url": "https://www.phdcollectibles.com/urun/star-wars-the-high-republic-1-aaron-kuder-variant",
+        "stock": 21,
+        "description": "Star Wars: The High Republic #1 Aaron Kuder Variant koleksiyon ürünü."
+    },
+    {
+        "id": 45,
+        "name": "Star Wars: The High Republic #4 Paolo Villanelli Exclusive Variant Opt.",
+        "price": 1080.55,
+        "price_formatted": "1.080,55 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/075/large-7208848-1.jpg?revision=1749047912",
+        "url": "https://www.phdcollectibles.com/urun/star-wars-the-high-republic-4-paolo-villanelli-exclusive-variant-opt",
+        "stock": 17,
+        "description": "Star Wars: The High Republic #4 Paolo Villanelli Exclusive Variant Opt. koleksiyon ürünü."
+    },
+    {
+        "id": 46,
+        "name": "Star Wars: War of the Bounty Hunters Alpha Clayton Crain Exclusive Variant",
+        "price": 0.0,
+        "price_formatted": "%35\n\n                                        864,44 TL\n                                    \n\n                                    561,89 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/078/large-8104794-1.jpg?revision=1729193847",
+        "url": "https://www.phdcollectibles.com/urun/star-wars-war-of-the-bounty-hunters-alpha-clayton-crain-exclusive-variant",
+        "stock": 0,
+        "description": "Star Wars: War of the Bounty Hunters Alpha Clayton Crain Exclusive Variant koleksiyon ürünü."
+    },
+    {
+        "id": 47,
+        "name": "STREET FİGHTER: 2021 SCİ-Fİ & FANTASY SPECİAL #1 GURJEET SİNGH EXCLUSİVE VARİANT",
+        "price": 0.0,
+        "price_formatted": "%35\n\n                                        4.279,42 TL\n                                    \n\n                                    2.781,62 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/079/large-9182134-1.jpg?revision=1764701281",
+        "url": "https://www.phdcollectibles.com/urun/street-fighter-2021-sci-fi-fantasy-special-1-gurjeet-singh-exclusive-variant",
+        "stock": 0,
+        "description": "STREET FİGHTER: 2021 SCİ-Fİ & FANTASY SPECİAL #1 GURJEET SİNGH EXCLUSİVE VARİANT koleksiyon ürünü."
+    },
+    {
+        "id": 48,
+        "name": "Street Fighter #1 John Giang Exclusive Variant",
+        "price": 5186.66,
+        "price_formatted": "5.186,66 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/081/falloutcltr-b28f7c10-4767-438a-b872-e8ddc35cd0c1.jpg?revision=1713606387",
+        "url": "https://www.phdcollectibles.com/urun/street-fighter-1-john-giang-exclusive-variant",
+        "stock": 46,
+        "description": "Street Fighter #1 John Giang Exclusive Variant koleksiyon ürünü."
+    },
+    {
+        "id": 49,
+        "name": "Vampirella #25 Puppeteer Lee Virgin Variant Exclusive LE 250",
+        "price": 941.47,
+        "price_formatted": "941,47 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/082/s-l1200-3.jpg?revision=1723196533",
+        "url": "https://www.phdcollectibles.com/urun/vampirella-25-puppeteer-lee-virgin-variant-exclusive-le-250",
+        "stock": 17,
+        "description": "Vampirella #25 Puppeteer Lee Virgin Variant Exclusive LE 250 koleksiyon ürünü."
+    },
+    {
+        "id": 50,
+        "name": "X of Swords : Creation #1 Peach Momoko Exclusive Variant",
+        "price": 648.33,
+        "price_formatted": "648,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/083/7-ate-9-comics-comic-trade-dress-x-of-swords-creation-1-peach-momoko-variant-cover-options-19029971533974-1024x1024.jpg?revision=1733051097",
+        "url": "https://www.phdcollectibles.com/urun/x-of-swords-creation-1-peach-momoko-exclusive-variant",
+        "stock": 32,
+        "description": "X of Swords : Creation #1 Peach Momoko Exclusive Variant koleksiyon ürünü."
+    },
+    {
+        "id": 51,
+        "name": "X-MEN #1 Jee HyungLee Exclusive Variant Trade Dress",
+        "price": 1426.33,
+        "price_formatted": "1.426,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/084/s-l1600-1-1.jpg?revision=1713607116",
+        "url": "https://www.phdcollectibles.com/urun/x-men-1-jee-hyunglee-exclusive-variant-trade-dress",
+        "stock": 16,
+        "description": "X-MEN #1 Jee HyungLee Exclusive Variant Trade Dress koleksiyon ürünü."
+    },
+    {
+        "id": 52,
+        "name": "Uncanny X-Men #141 Facsimile Ejikure #468 Homage Exclusive Cover Opt.",
+        "price": 864.44,
+        "price_formatted": "864,44 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/085/351d038b-4b01-40a4-854c-0d4d36c2a0e5-1024x1024-2x.jpg?revision=1758384604",
+        "url": "https://www.phdcollectibles.com/urun/uncanny-x-men-141-facsimile-ejikure-468-homage-exclusive-cover-opt",
+        "stock": 17,
+        "description": "Uncanny X-Men #141 Facsimile Ejikure #468 Homage Exclusive Cover Opt. koleksiyon ürünü."
+    },
+    {
+        "id": 53,
+        "name": "W0rldtr33 #1",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/088/large-6889159.jpg?revision=1738661708",
+        "url": "https://www.phdcollectibles.com/urun/w0rldtr33-1",
+        "stock": 16,
+        "description": "W0rldtr33 #1 koleksiyon ürünü."
+    },
+    {
+        "id": 54,
+        "name": "W0rldtr33 #1 Cover B Aja",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/089/large-2994080.jpg?revision=1738661678",
+        "url": "https://www.phdcollectibles.com/urun/w0rldtr33-1-cover-b-aja",
+        "stock": 38,
+        "description": "W0rldtr33 #1 Cover B Aja koleksiyon ürünü."
+    },
+    {
+        "id": 55,
+        "name": "The Witcher: Wild Animals #1",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/090/large-9092521.jpg?revision=1740039851",
+        "url": "https://www.phdcollectibles.com/urun/the-witcher-wild-animals-1",
+        "stock": 13,
+        "description": "The Witcher: Wild Animals #1 koleksiyon ürünü."
+    },
+    {
+        "id": 56,
+        "name": "The Witcher: The Ballad of Two Wolves #1",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/091/large-4115787.jpg?revision=1740039833",
+        "url": "https://www.phdcollectibles.com/urun/the-witcher-the-ballad-of-two-wolves-1",
+        "stock": 9,
+        "description": "The Witcher: The Ballad of Two Wolves #1 koleksiyon ürünü."
+    },
+    {
+        "id": 57,
+        "name": "The Witcher: The Ballad of Two Wolves #1 David Lopez Variant",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/092/large-9316978.jpg?revision=1740039843",
+        "url": "https://www.phdcollectibles.com/urun/the-witcher-the-ballad-of-two-wolves-1-david-lopez-variant",
+        "stock": 37,
+        "description": "The Witcher: The Ballad of Two Wolves #1 David Lopez Variant koleksiyon ürünü."
+    },
+    {
+        "id": 58,
+        "name": "The Witcher: Witch's Lament #1",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/093/large-3939314.jpg?revision=1740039857",
+        "url": "https://www.phdcollectibles.com/urun/the-witcher-witch-s-lament-1",
+        "stock": 34,
+        "description": "The Witcher: Witch's Lament #1 koleksiyon ürünü."
+    },
+    {
+        "id": 59,
+        "name": "The Walking Dead Deluxe #65",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/094/large-2360303.jpg?revision=1725552745",
+        "url": "https://www.phdcollectibles.com/urun/the-walking-dead-deluxe-65",
+        "stock": 45,
+        "description": "The Walking Dead Deluxe #65 koleksiyon ürünü."
+    },
+    {
+        "id": 60,
+        "name": "The Walking Dead Deluxe #64",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/095/large-7890957.jpg?revision=1725552733",
+        "url": "https://www.phdcollectibles.com/urun/the-walking-dead-deluxe-64",
+        "stock": 43,
+        "description": "The Walking Dead Deluxe #64 koleksiyon ürünü."
+    },
+    {
+        "id": 61,
+        "name": "Victory #1 E Cosplay Variant",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/096/large-2076393-1.jpg?revision=1733051059",
+        "url": "https://www.phdcollectibles.com/urun/victory-1-e-cosplay-variant",
+        "stock": 37,
+        "description": "Victory #1 E Cosplay Variant koleksiyon ürünü."
+    },
+    {
+        "id": 62,
+        "name": "Vampirella Strikes #13",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/097/large-2141446.jpg?revision=1713781816",
+        "url": "https://www.phdcollectibles.com/urun/vampirella-strikes-13",
+        "stock": 18,
+        "description": "Vampirella Strikes #13 koleksiyon ürünü."
+    },
+    {
+        "id": 63,
+        "name": "Space Usagi: Yokai Hunter #1",
+        "price": 259.33,
+        "price_formatted": "259,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/098/large-6065527.jpg?revision=1713781941",
+        "url": "https://www.phdcollectibles.com/urun/space-usagi-yokai-hunter-1",
+        "stock": 41,
+        "description": "Space Usagi: Yokai Hunter #1 koleksiyon ürünü."
+    },
+    {
+        "id": 64,
+        "name": "Space Usagi: Death and Honor #1 Sweeney Boo Variant",
+        "price": 259.33,
+        "price_formatted": "259,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/099/large-8687929-1.jpg?revision=1738663428",
+        "url": "https://www.phdcollectibles.com/urun/space-usagi-death-and-honor-1",
+        "stock": 29,
+        "description": "Space Usagi: Death and Honor #1 Sweeney Boo Variant koleksiyon ürünü."
+    },
+    {
+        "id": 65,
+        "name": "Teenage Mutant Ninja Turtles: The Last Ronin – The Lost Years Director's Cut #1",
+        "price": 302.55,
+        "price_formatted": "302,55 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/100/large-9845000.jpg?revision=1738494166",
+        "url": "https://www.phdcollectibles.com/urun/transformers-1",
+        "stock": 35,
+        "description": "Teenage Mutant Ninja Turtles: The Last Ronin – The Lost Years Director's Cut #1 koleksiyon ürünü."
+    },
+    {
+        "id": 66,
+        "name": "Teenage Mutant Ninja Turtles: Saturday Morning Adventures #1 CVR B KEVIN EASTMAN",
+        "price": 0.0,
+        "price_formatted": "%10\n\n                                        216,11 TL\n                                    \n\n                                    194,50 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/103/large-6799329.jpg?revision=1738494089",
+        "url": "https://www.phdcollectibles.com/urun/teenage-mutant-ninja-turtles-saturday-morning-adventures-1",
+        "stock": 0,
+        "description": "Teenage Mutant Ninja Turtles: Saturday Morning Adventures #1 CVR B KEVIN EASTMAN koleksiyon ürünü."
+    },
+    {
+        "id": 67,
+        "name": "Teenage Mutant Ninja Turtles: Saturday Morning Adventures #2 Billy Martin Variant",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/107/large-2669787.jpg?revision=1713789589",
+        "url": "https://www.phdcollectibles.com/urun/teenage-mutant-ninja-turtles-saturday-morning-adventures-2-billy-martin-variant",
+        "stock": 17,
+        "description": "Teenage Mutant Ninja Turtles: Saturday Morning Adventures #2 Billy Martin Variant koleksiyon ürünü."
+    },
+    {
+        "id": 68,
+        "name": "Symon Sayz #1-2 Set",
+        "price": 259.33,
+        "price_formatted": "259,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/108/large-3674410.jpg?revision=1738662993",
+        "url": "https://www.phdcollectibles.com/urun/symon-sayz-1",
+        "stock": 41,
+        "description": "Symon Sayz #1-2 Set koleksiyon ürünü."
+    },
+    {
+        "id": 69,
+        "name": "Mirka Andolfo's Sweet Paprika #1",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/109/large-8294582.jpg?revision=1738663212",
+        "url": "https://www.phdcollectibles.com/urun/mirka-andolfo-s-sweet-paprika-1",
+        "stock": 46,
+        "description": "Mirka Andolfo's Sweet Paprika #1 koleksiyon ürünü."
+    },
+    {
+        "id": 70,
+        "name": "Mirka Andolfo's Sweet Paprika #1 Blank Cover",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/110/large-7841380.jpg?revision=1713790168",
+        "url": "https://www.phdcollectibles.com/urun/mirka-andolfo-s-sweet-paprika-1-blank-cover",
+        "stock": 15,
+        "description": "Mirka Andolfo's Sweet Paprika #1 Blank Cover koleksiyon ürünü."
+    },
+    {
+        "id": 71,
+        "name": "Mirka Andolfo's Sweet Paprika #2",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/111/large-7496252.jpg?revision=1713790216",
+        "url": "https://www.phdcollectibles.com/urun/mirka-andolfo-s-sweet-paprika-2",
+        "stock": 16,
+        "description": "Mirka Andolfo's Sweet Paprika #2 koleksiyon ürünü."
+    },
+    {
+        "id": 72,
+        "name": "Swan Songs #5",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/112/large-1429003.jpg?revision=1738670554",
+        "url": "https://www.phdcollectibles.com/urun/swan-songs-5",
+        "stock": 43,
+        "description": "Swan Songs #5 koleksiyon ürünü."
+    },
+    {
+        "id": 73,
+        "name": "Swan Songs #3",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/114/large-2855958.jpg?revision=1740039233",
+        "url": "https://www.phdcollectibles.com/urun/swan-songs-3",
+        "stock": 35,
+        "description": "Swan Songs #3 koleksiyon ürünü."
+    },
+    {
+        "id": 74,
+        "name": "Stray Dogs: Dog Days #1",
+        "price": 259.33,
+        "price_formatted": "259,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/115/large-1755828.jpg?revision=1740039208",
+        "url": "https://www.phdcollectibles.com/urun/street-fighter-swimsuit-special-2023",
+        "stock": 27,
+        "description": "Stray Dogs: Dog Days #1 koleksiyon ürünü."
+    },
+    {
+        "id": 75,
+        "name": "Spawn #345",
+        "price": 172.89,
+        "price_formatted": "172,89 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/118/large-5693231-1.jpg?revision=1740038976",
+        "url": "https://www.phdcollectibles.com/urun/spawn-345",
+        "stock": 32,
+        "description": "Spawn #345 koleksiyon ürünü."
+    },
+    {
+        "id": 76,
+        "name": "Something Epic #1",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/119/large-7169450.jpg?revision=1713867743",
+        "url": "https://www.phdcollectibles.com/urun/something-epic-1",
+        "stock": 28,
+        "description": "Something Epic #1 koleksiyon ürünü."
+    },
+    {
+        "id": 77,
+        "name": "Shadecraft #1 Jock Variant",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/120/large-7233650-1.jpg?revision=1713880438",
+        "url": "https://www.phdcollectibles.com/urun/shadecraft-1-jock-variant",
+        "stock": 18,
+        "description": "Shadecraft #1 Jock Variant koleksiyon ürünü."
+    },
+    {
+        "id": 78,
+        "name": "Scarlett Couture: The Munich File #2",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/121/large-4876302-1.jpg?revision=1733050915",
+        "url": "https://www.phdcollectibles.com/urun/scarlett-couture-the-munich-file-2",
+        "stock": 49,
+        "description": "Scarlett Couture: The Munich File #2 koleksiyon ürünü."
+    },
+    {
+        "id": 79,
+        "name": "Scarlett Couture: The Munich File #1 Leirix Variant",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/125/large-9990374.jpg?revision=1733050908",
+        "url": "https://www.phdcollectibles.com/urun/scarlett-couture-the-munich-file-1-leirix-variant",
+        "stock": 31,
+        "description": "Scarlett Couture: The Munich File #1 Leirix Variant koleksiyon ürünü."
+    },
+    {
+        "id": 80,
+        "name": "Rick and Morty: Meeseeks P.I. #1",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/126/large-1824688.jpg?revision=1740038948",
+        "url": "https://www.phdcollectibles.com/urun/rick-and-morty-meeseeks-p-i-1",
+        "stock": 32,
+        "description": "Rick and Morty: Meeseeks P.I. #1 koleksiyon ürünü."
+    },
+    {
+        "id": 81,
+        "name": "Rick and Morty: Heart of Rickness #1 Cover B Luce Variant",
+        "price": 259.33,
+        "price_formatted": "259,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/129/large-9325752.jpg?revision=1713880455",
+        "url": "https://www.phdcollectibles.com/urun/rick-and-morty-heart-of-rickness-1-cover-b-luce-variant",
+        "stock": 23,
+        "description": "Rick and Morty: Heart of Rickness #1 Cover B Luce Variant koleksiyon ürünü."
+    },
+    {
+        "id": 82,
+        "name": "Rick and Morty vs. Cthulhu #1 Cover C Ellerby",
+        "price": 259.33,
+        "price_formatted": "259,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/130/large-5743157.jpg?revision=1721293347",
+        "url": "https://www.phdcollectibles.com/urun/rick-and-morty-vs-cthulhu-1-cover-c-ellerby",
+        "stock": 28,
+        "description": "Rick and Morty vs. Cthulhu #1 Cover C Ellerby koleksiyon ürünü."
+    },
+    {
+        "id": 83,
+        "name": "Rick and Morty: Infinity Hour",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/131/large-9919632.jpg?revision=1738065071",
+        "url": "https://www.phdcollectibles.com/urun/rick-and-morty-infinity-hour",
+        "stock": 41,
+        "description": "Rick and Morty: Infinity Hour koleksiyon ürünü."
+    },
+    {
+        "id": 84,
+        "name": "Red Sonja #3",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/132/large-2418878-1.jpg?revision=1713878676",
+        "url": "https://www.phdcollectibles.com/urun/red-sonja-3",
+        "stock": 24,
+        "description": "Red Sonja #3 koleksiyon ürünü."
+    },
+    {
+        "id": 85,
+        "name": "Red Sonja #3 Parillo Cover D",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/133/large-5488905.jpg?revision=1713878748",
+        "url": "https://www.phdcollectibles.com/urun/red-sonja-3-parillo-cover-d",
+        "stock": 13,
+        "description": "Red Sonja #3 Parillo Cover D koleksiyon ürünü."
+    },
+    {
+        "id": 86,
+        "name": "Red Sonja #3 Cover I 1:10 Middleton Bloody Variant",
+        "price": 432.22,
+        "price_formatted": "432,22 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/134/large-1150156.jpg?revision=1713880202",
+        "url": "https://www.phdcollectibles.com/urun/red-sonja-3-cover-i-1-10-middleton-bloody-variant",
+        "stock": 36,
+        "description": "Red Sonja #3 Cover I 1:10 Middleton Bloody Variant koleksiyon ürünü."
+    },
+    {
+        "id": 87,
+        "name": "Red Sonja #3 Cover P 1:30 Middleton Bloody Virgin",
+        "price": 648.33,
+        "price_formatted": "648,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/135/large-1905775.jpg?revision=1713880299",
+        "url": "https://www.phdcollectibles.com/urun/red-sonja-3-cover-p-1-30-middleton-bloody-virgin",
+        "stock": 36,
+        "description": "Red Sonja #3 Cover P 1:30 Middleton Bloody Virgin koleksiyon ürünü."
+    },
+    {
+        "id": 88,
+        "name": "Unbreakable Red Sonja #1 Cover F Blank Authentix",
+        "price": 259.33,
+        "price_formatted": "259,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/136/large-9371186.jpg?revision=1738664814",
+        "url": "https://www.phdcollectibles.com/urun/unbreakable-red-sonja-1-cover-f-blank-authentix",
+        "stock": 6,
+        "description": "Unbreakable Red Sonja #1 Cover F Blank Authentix koleksiyon ürünü."
+    },
+    {
+        "id": 89,
+        "name": "Red Light #1",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/137/large-6770366.jpg?revision=1738664938",
+        "url": "https://www.phdcollectibles.com/urun/red-light-1",
+        "stock": 8,
+        "description": "Red Light #1 koleksiyon ürünü."
+    },
+    {
+        "id": 90,
+        "name": "The North Valley Grimoire #1",
+        "price": 259.33,
+        "price_formatted": "259,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/140/large-7278235.jpg?revision=1738666642",
+        "url": "https://www.phdcollectibles.com/urun/primordial-1",
+        "stock": 35,
+        "description": "The North Valley Grimoire #1 koleksiyon ürünü."
+    },
+    {
+        "id": 91,
+        "name": "No Ghosts in Hiroshima #1",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/143/large-8706737-1.jpg?revision=1738666957",
+        "url": "https://www.phdcollectibles.com/urun/no-ghosts-in-hiroshima-1",
+        "stock": 47,
+        "description": "No Ghosts in Hiroshima #1 koleksiyon ürünü."
+    },
+    {
+        "id": 92,
+        "name": "Night Club #1 Cover C Greg Capullo Variant",
+        "price": 129.67,
+        "price_formatted": "129,67 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/146/large-6171715.jpg?revision=1713881563",
+        "url": "https://www.phdcollectibles.com/urun/night-club-1-cover-c-greg-capullo-variant",
+        "stock": 32,
+        "description": "Night Club #1 Cover C Greg Capullo Variant koleksiyon ürünü."
+    },
+    {
+        "id": 93,
+        "name": "Ninja Funk #1",
+        "price": 259.33,
+        "price_formatted": "259,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/148/large-7110951-1.jpg?revision=1713881643",
+        "url": "https://www.phdcollectibles.com/urun/ninja-funk-1",
+        "stock": 28,
+        "description": "Ninja Funk #1 koleksiyon ürünü."
+    },
+    {
+        "id": 94,
+        "name": "Nemesis Reloaded #1",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/149/large-8511490.jpg?revision=1713881802",
+        "url": "https://www.phdcollectibles.com/urun/nemesis-reloaded-1",
+        "stock": 32,
+        "description": "Nemesis Reloaded #1 koleksiyon ürünü."
+    },
+    {
+        "id": 95,
+        "name": "Mighty Morphin Power Rangers #100 Cover F 1:10 Bon Bernardo Variant",
+        "price": 475.44,
+        "price_formatted": "475,44 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/150/large-3656479.jpg?revision=1733050903",
+        "url": "https://www.phdcollectibles.com/urun/mighty-morphin-power-rangers-100-cover-f-1-10-bon-bernardo-variant",
+        "stock": 28,
+        "description": "Mighty Morphin Power Rangers #100 Cover F 1:10 Bon Bernardo Variant koleksiyon ürünü."
+    },
+    {
+        "id": 96,
+        "name": "Mighty Morphin Power Rangers #100 2nd Printing Dan Mora",
+        "price": 475.44,
+        "price_formatted": "475,44 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/151/large-8264196.jpg?revision=1713887336",
+        "url": "https://www.phdcollectibles.com/urun/mighty-morphin-power-rangers-100-2nd-printing-dan-mora",
+        "stock": 10,
+        "description": "Mighty Morphin Power Rangers #100 2nd Printing Dan Mora koleksiyon ürünü."
+    },
+    {
+        "id": 97,
+        "name": "Mighty Morphin Power Rangers / Teenage Mutant Ninja Turtles II #1 Cover K Freddie E. Williams II Deluxe Edition Variant",
+        "price": 345.78,
+        "price_formatted": "345,78 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/152/large-9381125-1.jpg?revision=1738667052",
+        "url": "https://www.phdcollectibles.com/urun/mighty-morphin-power-rangers-teenage-mutant-ninja-turtles-ii-1-cover-k-freddie-e-williams-ii-deluxe-edition-variant",
+        "stock": 8,
+        "description": "Mighty Morphin Power Rangers / Teenage Mutant Ninja Turtles II #1 Cover K Freddie E. Williams II Deluxe Edition Variant koleksiyon ürünü."
+    },
+    {
+        "id": 98,
+        "name": "Miss Meow #2",
+        "price": 259.33,
+        "price_formatted": "259,33 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/153/large-9609065.jpg?revision=1733050280",
+        "url": "https://www.phdcollectibles.com/urun/miss-meow-2",
+        "stock": 34,
+        "description": "Miss Meow #2 koleksiyon ürünü."
+    },
+    {
+        "id": 99,
+        "name": "Maw #1",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/154/large-6678208.jpg?revision=1713887271",
+        "url": "https://www.phdcollectibles.com/urun/maw-1",
+        "stock": 50,
+        "description": "Maw #1 koleksiyon ürünü."
+    },
+    {
+        "id": 100,
+        "name": "Love Everlasting #1 Cover E Jenny Frison Variant",
+        "price": 216.11,
+        "price_formatted": "216,11 TL",
+        "image": "https://www.phdcollectibles.com/idea/oe/84/myassets/products/155/large-9896408.jpg?revision=1738667436",
+        "url": "https://www.phdcollectibles.com/urun/love-everlasting-1-cover-e-jenny-frison-variant",
+        "stock": 15,
+        "description": "Love Everlasting #1 Cover E Jenny Frison Variant koleksiyon ürünü."
+    }
 ]

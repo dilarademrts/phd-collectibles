@@ -103,4 +103,4 @@ def recommend():
 # --- 5. SUNUCUYU BAŞLAT ---
 if __name__ == '__main__':
     # Node.js 3000'de çalışıyor, biz karışmasın diye 5001 yapıyoruz.
-    app.run(port=5001, debug=True)
+    app.run(port=5002, debug=True)
