@@ -2,13 +2,17 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const OpenAI = require('openai');
-
-
 const db = require('../../db/index'); 
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
+
+// Helper: String geçerli bir UUID mi kontrol eder
+function isUUID(str) {
+    const regex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    return regex.test(str);
+}
 
 // Endpoint: /ai/ask
 router.post('/ask', async (req, res) => {
@@ -19,9 +23,57 @@ router.post('/ask', async (req, res) => {
     }
 
     try {
-        // --- ADIM 1: Veritabanı Araması (RAG) ---
-        // Ürün tablosunda (product) arama yapıyoruz
-        const sqlQuery = `
+        // --- 1. AŞAMA: SORUDA ID ARAMA (GÜVENLİ VERSİYON) ---
+        // Hem UUID formatını (uzun tireli kod) hem de basit sayıları yakalamaya çalışalım
+        // Örn: "a0eebc99-..." veya "5"
+        const potentialMatch = question.match(/([a-f0-9-]{36})|(\d+)/i);
+        
+        let orderInfoText = "Kullanıcı spesifik bir sipariş numarası belirtmedi.";
+        let orderFound = false;
+
+        if (potentialMatch) {
+            const capturedId = potentialMatch[0];
+
+            // BURASI KRİTİK: Eğer yakalanan şey UUID formatında değilse DB'ye sorma! Çökersin.
+            if (isUUID(capturedId)) {
+                const orderQuery = `
+                    SELECT 
+                        o.order_id, o.status, o.total_amount, o.order_date,
+                        u.name as customer_name,
+                        p.name as product_name, oi.quantity
+                    FROM orders o
+                    JOIN users u ON o.user_id = u.user_id
+                    JOIN order_item oi ON o.order_id = oi.order_id
+                    JOIN product p ON oi.product_id = p.product_id
+                    WHERE o.order_id = $1
+                `;
+
+                const orderResult = await db.query(orderQuery, [capturedId]);
+
+                if (orderResult.rows.length > 0) {
+                    const firstRow = orderResult.rows[0];
+                    const productsList = orderResult.rows.map(r => `${r.product_name} (${r.quantity} adet)`).join(", ");
+                    
+                    orderInfoText = `
+                    BULUNAN SİPARİŞ DETAYLARI (#${capturedId}):
+                    - Müşteri: ${firstRow.customer_name}
+                    - Durum: ${firstRow.status}
+                    - Tarih: ${new Date(firstRow.order_date).toLocaleDateString("tr-TR")}
+                    - İçerik: ${productsList}
+                    - Toplam Tutar: ${firstRow.total_amount} TL
+                    `;
+                    orderFound = true;
+                } else {
+                    orderInfoText = `Sistemde #${capturedId} ID'li bir sipariş bulunamadı.`;
+                }
+            } else {
+                // Eğer kullanıcı "5" dediyse ama bizim DB UUID ise burası çalışır:
+                orderInfoText = `Kullanıcı '${capturedId}' diye kısa bir numara söyledi ama bizim veritabanımız UUID (uzun kod) kullanıyor. Bu yüzden sipariş detayını çekemedim. Kullanıcıya siparişin tam UUID kodunu veya e-posta adresini sorabilirsin.`;
+            }
+        }
+
+        // --- 2. AŞAMA: ÜRÜN ARAMASI ---
+        const productQuery = `
             SELECT name, price, stock_quantity, description 
             FROM product 
             WHERE name ILIKE $1 OR description ILIKE $1 
@@ -29,44 +81,45 @@ router.post('/ask', async (req, res) => {
         `;
         
         const searchTerm = `%${question}%`;
-        const dbResult = await db.query(sqlQuery, [searchTerm]);
+        const productResult = await db.query(productQuery, [searchTerm]);
         
         let foundProductsText = "";
-
-        if (dbResult.rows.length > 0) {
-            foundProductsText = "Veritabanı Sonuçları (Stok ve Fiyat Bilgisi Buradan):\n" + 
-                dbResult.rows.map(p => 
-                    `- Ürün Adı: ${p.name}\n  Fiyat: ${p.price} TL\n  Stok Adedi: ${p.stock_quantity}\n  Açıklama: ${p.description}`
-                ).join("\n\n");
+        if (productResult.rows.length > 0) {
+            foundProductsText = productResult.rows.map(p => 
+                `- Ürün: ${p.name} | Fiyat: ${p.price} TL | Stok: ${p.stock_quantity} | Açıklama: ${p.description}`
+            ).join("\n");
         } else {
-            foundProductsText = "Veritabanında bu aramayla eşleşen bir çizgi roman bulunamadı. Müşteriye nazikçe elimizde olmadığını söyle.";
+            foundProductsText = "Veritabanında ürün eşleşmesi yok.";
         }
 
-        // --- ADIM 2: AI'a Gönder ---
+        // --- 3. AŞAMA: AI'A GÖNDER ---
         const completion = await openai.chat.completions.create({
             model: "gpt-4o-mini",
             messages: [
                 {
                     role: "system",
-                    content: `Senin Rolün: Adın Stan. "PHD Collectibles" çizgi roman dükkanının yapay zeka asistanısın.
-                    Kişiliğin: Çok heyecanlı, geek, çizgi roman kültürüyle konuşan, bol emoji kullanan birisin.
+                    content: `Sen Stan'sin. "PHD Collectibles" çizgi roman dükkanının yapay zeka asistanısın.
                     
-                    GÖREVİN: Sana aşağıda vereceğim [DÜKKAN STOK BİLGİSİ]'ne bakarak müşterinin sorusunu cevapla.
+                    GÖREVİN: Aşağıdaki bilgilere göre cevap ver.
                     
-                    KURALLAR:
-                    1. Stok 0 ise: "Üzgünüm dostum, bu ürün şu an stoklarımızda kalmamış! 🕸️" de.
-                    2. Stok varsa: Fiyatını söyle ve ürünü öv.
-                    3. Ürün yoksa: "Raflara baktım ama bulamadım." de.
+                    [VERİTABANI BİLGİLERİ]
+                    --- SİPARİŞ DURUMU ---
+                    ${orderInfoText}
 
-                    [DÜKKAN STOK BİLGİSİ]:
-                    ${foundProductsText}`
+                    --- ÜRÜN BİLGİSİ ---
+                    ${foundProductsText}
+                    
+                    ÖNEMLİ İPUCU:
+                    Eğer [SİPARİŞ DURUMU] kısmında "kısa numara söyledi ama UUID lazım" uyarısı varsa, kullanıcıya nazikçe:
+                    "Dostum, sipariş numaralarımız biraz karmaşık (UUID formatında). Bana tam kodu söyleyebilir misin? Ya da 'X ürününden var mı?' diye sorabilirsin!" de.
+                    `
                 },
                 {
                     role: "user",
                     content: question
                 }
             ],
-            max_tokens: 200,
+            max_tokens: 250,
             temperature: 0.7,
         });
 
@@ -74,8 +127,8 @@ router.post('/ask', async (req, res) => {
         res.json({ answer: answer });
 
     } catch (error) {
-        console.error("Hata Detayı:", error);
-        res.status(500).json({ answer: "Whoops! Örümcek hislerim bir terslik olduğunu söylüyor. (Sistem hatası) 🕷️" });
+        console.error("AI Hatası:", error);
+        res.status(500).json({ answer: "Sistemde bir hata oluştu! 🕷️" });
     }
 });
 
