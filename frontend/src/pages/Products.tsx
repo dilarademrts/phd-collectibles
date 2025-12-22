@@ -51,17 +51,46 @@ type EditForm = {
   imageUrl: string; // url or ""
 };
 
+type CreateForm = {
+  name: string;
+  price: string;
+  stock: string;
+  categoryId: string;
+  imageUrl: string;
+};
+
 export default function Products() {
   const qc = useQueryClient();
 
   const [search, setSearch] = useState("");
+
+  // EDIT
   const [editOpen, setEditOpen] = useState(false);
   const [edit, setEdit] = useState<EditForm | null>(null);
+
+  // CREATE
+  const [createOpen, setCreateOpen] = useState(false);
+  const [create, setCreate] = useState<CreateForm>({
+    name: "",
+    price: "",
+    stock: "0",
+    categoryId: "",
+    imageUrl: "",
+  });
 
   const productsQ = useQuery({
     queryKey: ["products"],
     queryFn: () => api.products(),
     staleTime: 30_000,
+  });
+
+  const createMutation = useMutation({
+    mutationFn: (payload: any) => api.createProduct(payload),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["products"] });
+      setCreateOpen(false);
+      setCreate({ name: "", price: "", stock: "0", categoryId: "", imageUrl: "" });
+    },
   });
 
   const deleteMutation = useMutation({
@@ -109,7 +138,7 @@ export default function Products() {
 
   // KPI
   const totalProducts = products.length;
-  const lowStockProducts = products.filter((p) => p.stock > 0 && p.stock < 5).length;
+  const lowStockProducts = products.filter((p) => p.stock > 0 && p.stock < 3).length;
   const soldOutProducts = products.filter((p) => p.stock === 0).length;
 
   function openEdit(product: UiProduct) {
@@ -130,18 +159,10 @@ export default function Products() {
     const price = Number(edit.price);
     const stock = Number(edit.stock);
 
-    if (!edit.name.trim()) {
-      alert("Name is required.");
-      return;
-    }
-    if (Number.isNaN(price) || price < 0) {
-      alert("Price must be a valid number (>= 0).");
-      return;
-    }
-    if (!Number.isInteger(stock) || stock < 0) {
-      alert("Stock must be a valid integer (>= 0).");
-      return;
-    }
+    if (!edit.name.trim()) return alert("Name is required.");
+    if (Number.isNaN(price) || price < 0) return alert("Price must be a valid number (>= 0).");
+    if (!Number.isInteger(stock) || stock < 0)
+      return alert("Stock must be a valid integer (>= 0).");
 
     updateMutation.mutate({
       id: edit.id,
@@ -151,9 +172,32 @@ export default function Products() {
         stock_quantity: stock,
         category_id: edit.categoryId.trim() ? edit.categoryId.trim() : null,
         image_url: edit.imageUrl.trim() ? edit.imageUrl.trim() : null,
+        description: null,
       },
     });
   }
+
+  function saveCreate() {
+    const name = create.name.trim();
+    const price = Number(create.price);
+    const stock = Number(create.stock);
+
+    if (!name) return alert("Name is required.");
+    if (Number.isNaN(price) || price < 0) return alert("Price must be a valid number (>= 0).");
+    if (!Number.isInteger(stock) || stock < 0)
+      return alert("Stock must be a valid integer (>= 0).");
+
+    createMutation.mutate({
+      name,
+      price,
+      stock_quantity: stock,
+      category_id: create.categoryId.trim() ? create.categoryId.trim() : null,
+      image_url: create.imageUrl.trim() ? create.imageUrl.trim() : null,
+      description: null,
+    });
+  }
+
+  const busy = productsQ.isLoading || createMutation.isPending || updateMutation.isPending || deleteMutation.isPending;
 
   return (
     <div className="space-y-6">
@@ -162,7 +206,8 @@ export default function Products() {
           <h1 className="text-3xl font-bold tracking-tight">Products</h1>
           <p className="text-muted-foreground">Manage your product inventory</p>
         </div>
-        <Button>
+
+        <Button onClick={() => setCreateOpen(true)} disabled={busy}>
           <Plus className="h-4 w-4 mr-2" />
           Add Product
         </Button>
@@ -175,9 +220,7 @@ export default function Products() {
             <CardTitle className="text-sm font-medium">Total Products</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {productsQ.isLoading ? "—" : totalProducts}
-            </div>
+            <div className="text-2xl font-bold">{productsQ.isLoading ? "—" : totalProducts}</div>
           </CardContent>
         </Card>
 
@@ -186,9 +229,7 @@ export default function Products() {
             <CardTitle className="text-sm font-medium">Low Stock</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {productsQ.isLoading ? "—" : lowStockProducts}
-            </div>
+            <div className="text-2xl font-bold">{productsQ.isLoading ? "—" : lowStockProducts}</div>
           </CardContent>
         </Card>
 
@@ -197,9 +238,7 @@ export default function Products() {
             <CardTitle className="text-sm font-medium">Out of Stock</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {productsQ.isLoading ? "—" : soldOutProducts}
-            </div>
+            <div className="text-2xl font-bold">{productsQ.isLoading ? "—" : soldOutProducts}</div>
           </CardContent>
         </Card>
       </div>
@@ -299,7 +338,7 @@ export default function Products() {
                         variant="ghost"
                         size="sm"
                         onClick={() => openEdit(product)}
-                        disabled={updateMutation.isPending || deleteMutation.isPending}
+                        disabled={busy}
                       >
                         Edit
                       </Button>
@@ -312,7 +351,7 @@ export default function Products() {
                             deleteMutation.mutate(product.id);
                           }
                         }}
-                        disabled={deleteMutation.isPending || updateMutation.isPending}
+                        disabled={busy}
                       >
                         {deleteMutation.isPending ? "Deleting..." : "Delete"}
                       </Button>
@@ -324,6 +363,84 @@ export default function Products() {
           </Table>
         </CardContent>
       </Card>
+
+      {/* CREATE DIALOG */}
+      <Dialog open={createOpen} onOpenChange={(v) => !createMutation.isPending && setCreateOpen(v)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add Product</DialogTitle>
+            <DialogDescription>Create a new product and save to database.</DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-3">
+            <div className="space-y-1">
+              <div className="text-sm font-medium">Name</div>
+              <Input
+                value={create.name}
+                onChange={(e) => setCreate({ ...create, name: e.target.value })}
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1">
+                <div className="text-sm font-medium">Price</div>
+                <Input
+                  inputMode="decimal"
+                  value={create.price}
+                  onChange={(e) => setCreate({ ...create, price: e.target.value })}
+                />
+              </div>
+
+              <div className="space-y-1">
+                <div className="text-sm font-medium">Stock</div>
+                <Input
+                  inputMode="numeric"
+                  value={create.stock}
+                  onChange={(e) => setCreate({ ...create, stock: e.target.value })}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <div className="text-sm font-medium">Category ID (optional)</div>
+              <Input
+                value={create.categoryId}
+                onChange={(e) => setCreate({ ...create, categoryId: e.target.value })}
+                placeholder="uuid..."
+              />
+            </div>
+
+            <div className="space-y-1">
+              <div className="text-sm font-medium">Image URL (optional)</div>
+              <Input
+                value={create.imageUrl}
+                onChange={(e) => setCreate({ ...create, imageUrl: e.target.value })}
+                placeholder="https://..."
+              />
+            </div>
+
+            {createMutation.isError && (
+              <div className="rounded-md border border-destructive/30 bg-destructive/10 p-3 text-sm">
+                Create failed: {String(createMutation.error)}
+              </div>
+            )}
+          </div>
+
+          <DialogFooter>
+            <Button
+              variant="ghost"
+              onClick={() => !createMutation.isPending && setCreateOpen(false)}
+              disabled={createMutation.isPending}
+            >
+              Cancel
+            </Button>
+
+            <Button onClick={saveCreate} disabled={createMutation.isPending}>
+              {createMutation.isPending ? "Saving..." : "Save"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* EDIT DIALOG */}
       <Dialog open={editOpen} onOpenChange={(v) => !updateMutation.isPending && setEditOpen(v)}>

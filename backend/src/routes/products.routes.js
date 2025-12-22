@@ -77,4 +77,39 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// POST /products
+router.post("/", async (req, res) => {
+  const { name, description, price, stock_quantity, category_id, image_url } = req.body;
+
+  if (!name || !String(name).trim()) {
+    return res.status(400).json({ error: "name is required" });
+  }
+  if (price === undefined || price === null || Number.isNaN(Number(price))) {
+    return res.status(400).json({ error: "price is required and must be a number" });
+  }
+
+  try {
+    const r = await db.query(
+      `
+      INSERT INTO product (name, description, price, stock_quantity, category_id, image_url)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING product_id, name, description, price, stock_quantity, category_id, image_url
+      `,
+      [
+        String(name).trim(),
+        description ?? null,
+        Number(price),
+        stock_quantity === undefined || stock_quantity === null ? 0 : Number(stock_quantity),
+        category_id ?? null,
+        image_url ?? null,
+      ]
+    );
+
+    res.status(201).json(r.rows[0]);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+
 module.exports = router;

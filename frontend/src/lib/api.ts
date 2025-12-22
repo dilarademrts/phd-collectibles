@@ -83,5 +83,12 @@ deleteProduct: (id: string) =>
     method: "DELETE",
   }),
 
+//create product
+  createProduct: (payload: any) =>
+  json("/products", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  }),
+
   
 };
