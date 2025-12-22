@@ -132,12 +132,31 @@ router.get("/:id/invoice", async (req, res) => {
 
     const { file_path, file_name } = invRes.rows[0];
 
-    // Basit güvenlik kontrolü (istersen kaldır)
-    if (!file_path.includes(path.join("backend", "invoices")) && !file_path.includes("\\backend\\invoices")) {
-      return res.status(400).json({ error: "Geçersiz fatura yolu" });
+    // ✅ invoices klasörünü “tek doğru root” olarak kabul et
+    // Docker'da process.cwd() genelde /app olur
+    const invoicesDir = path.resolve(process.cwd(), "invoices");
+
+    // DB'den gelen path'i normalize et
+    const resolvedFilePath = path.resolve(file_path);
+
+    // ✅ Güvenlik: dosya invoices klasörü dışına çıkamasın (path traversal koruması)
+    if (!resolvedFilePath.startsWith(invoicesDir + path.sep)) {
+      return res.status(400).json({
+        error: "Geçersiz fatura yolu",
+        debug: { invoicesDir, resolvedFilePath }, // istersen kaldır
+      });
     }
 
-    return res.download(file_path, file_name);
+    // ✅ Dosya gerçekten var mı?
+    const fs = require("fs");
+    if (!fs.existsSync(resolvedFilePath)) {
+      return res.status(404).json({
+        error: "Fatura dosyası bulunamadı",
+        debug: { resolvedFilePath }, // istersen kaldır
+      });
+    }
+
+    return res.download(resolvedFilePath, file_name);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Sunucu hatası" });

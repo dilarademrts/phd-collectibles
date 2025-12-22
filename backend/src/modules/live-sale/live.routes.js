@@ -102,7 +102,7 @@ if (remaining < 3 && process.env.ADMIN_EMAIL) {
     text: `${product.name} stoğu ${remaining} oldu.`
   });
 }
-else if (remaining == 3 && process.env.ADMIN_EMAIL) {
+else if (remaining == 0 && process.env.ADMIN_EMAIL) {
   await sendMail({
     to: process.env.ADMIN_EMAIL,
     subject: `No Stock Uyarısı: ${product.name}`,
