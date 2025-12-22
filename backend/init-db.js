@@ -2,18 +2,19 @@ const db = require('./src/db');
 
 const initDatabase = async () => {
   try {
-    console.log('🚧 Veritabanı tabloları oluşturuluyor...');
+    console.log('🚧 Veritabanı tabloları sıfırdan kuruluyor...');
 
-    // 1. Temizlik (Eski tabloları sil)
+    
+    await db.query('DROP TABLE IF EXISTS preorder CASCADE'); 
     await db.query('DROP TABLE IF EXISTS order_items CASCADE');
     await db.query('DROP TABLE IF EXISTS orders CASCADE');
     await db.query('DROP TABLE IF EXISTS product CASCADE');
     await db.query('DROP TABLE IF EXISTS categories CASCADE');
     await db.query('DROP TABLE IF EXISTS users CASCADE');
 
-    // 2. Tabloları Kur
     
-    // USERS
+    
+    // USERS 
     await db.query(`
       CREATE TABLE users (
         id SERIAL PRIMARY KEY,
@@ -49,18 +50,18 @@ const initDatabase = async () => {
       );
     `);
 
-    // ORDERS (YENİ EKLENDİ) ✅
+    // ORDERS
     await db.query(`
       CREATE TABLE orders (
         id SERIAL PRIMARY KEY,
         customer_name VARCHAR(100),
         total_amount NUMERIC(10, 2) NOT NULL,
-        status VARCHAR(20) DEFAULT 'pending', -- 'completed', 'simulated', 'cancelled'
+        status VARCHAR(20) DEFAULT 'pending', 
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `);
 
-    // ORDER ITEMS (YENİ EKLENDİ - Sepetteki ürünler) ✅
+    // ORDER ITEMS
     await db.query(`
       CREATE TABLE order_items (
         id SERIAL PRIMARY KEY,
@@ -71,7 +72,21 @@ const initDatabase = async () => {
       );
     `);
 
-    console.log('🎉 Tüm tablolar (Siparişler dahil) başarıyla kuruldu!');
+    // PREORDER 
+    await db.query(`
+      CREATE TABLE preorder (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER REFERENCES users(id),
+        product_id INTEGER REFERENCES product(id),
+        quantity INTEGER DEFAULT 1,
+        status VARCHAR(50) DEFAULT 'active',
+        expected_arrival DATE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+    
+
+    console.log('🎉 TÜM TABLOLAR (Preorder dahil) BAŞARIYLA KURULDU!');
     process.exit(0);
 
   } catch (error) {
