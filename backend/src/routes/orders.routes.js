@@ -9,7 +9,7 @@ const db = require("../db");
 
 // Bunların gerçek yolunu projendeki klasörlere göre ayarla.
 // (Senin dosyada "./modules/..." yazıyordu ama routes klasöründen bakınca genelde "../modules/..." olur.)
-const { generateInvoice } = require("../modules/invoices/invoice.service");
+const { generateInvoice } = require("../modules/invoices/invoiceService");
 const { sendMail } = require("../modules/notifications/mail.service");
 
 // GET /orders/summary

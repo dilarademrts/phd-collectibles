@@ -10,71 +10,89 @@ app = Flask(__name__)
 CORS(app)
 
 # --- 1. VERİYİ YÜKLEME ---
-# Backend klasöründeki products.json dosyasını bulup okuyoruz
-# Not: ai-service klasöründen bir üst klasöre çıkıp backend/data'ya gidiyoruz.
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Docker volume ile bağlanan dosya yolu
 JSON_PATH = os.path.join(BASE_DIR, '..', 'backend', 'data', 'products.json')
 
 print(f"📂 Veri aranıyor: {JSON_PATH}")
+
+products_list = []
 
 try:
     with open(JSON_PATH, 'r', encoding='utf-8') as f:
         raw_data = json.load(f)
     
-    # JSON yapısı iç içe (Kategoriler -> Items). Bunu düzleştirip tek liste yapalım.
-    products_list = []
-    for category in raw_data:
-        for item in category['items']:
-            # AI'ın okuması için zengin bir metin oluşturuyoruz:
-            # "Batman Action Figure Gotham Dark Knight" gibi bir cümle kuruyoruz.
-            combined_text = f"{item['name']} {item['description']} {category['category']} {item.get('note', '')}"
+    # --- DÜZELTİLEN KISIM BAŞLANGIÇ ---
+    # Senin JSON dosyan düz bir liste, kategori ayrımı yok.
+    # Bu yüzden direkt liste üzerinde dönüyoruz.
+    if isinstance(raw_data, list):
+        print(f"ℹ️ Düz liste yapısı tespit edildi. Toplam {len(raw_data)} ürün var.")
+        for item in raw_data:
+            # name ve description alanlarını birleştirip AI'a öğretiyoruz
+            name = item.get('name', '')
+            desc = item.get('description', '')
             
+            # None gelme ihtimaline karşı string kontrolü
+            if name is None: name = ""
+            if desc is None: desc = ""
+
+            combined_text = f"{name} {desc}"
             item['combined_text'] = combined_text
             products_list.append(item)
+    else:
+        print("⚠️ Beklenmeyen JSON formatı! Veri bir liste değil.")
+    # --- DÜZELTİLEN KISIM BİTİŞ ---
 
     df = pd.DataFrame(products_list)
     print(f"✅ {len(df)} adet ürün başarıyla yüklendi ve AI hafızasına alındı.")
 
 except FileNotFoundError:
-    print("❌ HATA: products.json bulunamadı! Lütfen önce backend klasöründe 'node seed.js' çalıştırın.")
+    print("❌ HATA: products.json bulunamadı! Yol veya dosya eksik.")
+    df = pd.DataFrame()
+except Exception as e:
+    print(f"❌ BEKLENMEYEN HATA: {e}")
     df = pd.DataFrame()
 
-# --- 2. YAPAY ZEKA MODELİNİ EĞİTME (TF-IDF) ---
-# Burası işin matematiği. Metinleri sayısal vektörlere çeviriyoruz.
+# --- 2. YAPAY ZEKA MODELİNİ EĞİTME ---
+cosine_sim = None
 if not df.empty:
-    print("🧠 AI Modeli eğitiliyor (Matrix Matrix Çarpımı)...")
-    tfidf = TfidfVectorizer(stop_words='english')
-    
-    # Tüm ürünlerin özetini matrise çevir
-    tfidf_matrix = tfidf.fit_transform(df['combined_text'])
-    
-    # Benzerlik puanlarını hesapla (Cosine Similarity)
-    cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
-    print("🤖 Model Hazır! Tavsiye vermeye başlayabilirim.")
-else:
-    cosine_sim = None
+    try:
+        print("🧠 AI Modeli eğitiliyor (TF-IDF)...")
+        tfidf = TfidfVectorizer(stop_words='english')
+        # combined_text boş olanları temizle
+        df['combined_text'] = df['combined_text'].fillna('')
+        
+        tfidf_matrix = tfidf.fit_transform(df['combined_text'])
+        cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
+        print("🤖 Model Hazır! Tavsiye vermeye başlayabilirim.")
+    except Exception as e:
+        print(f"Model eğitilirken hata oluştu: {e}")
 
 # --- 3. ÖNERİ FONKSİYONU ---
 def get_recommendations(product_name):
-    if df.empty: return []
+    if df.empty or cosine_sim is None: return []
 
-    # 1. Gelen ürün ismini veritabanında bul
     try:
-        idx_list = df.index[df['name'] == product_name].tolist()
+        # Ürün ismini tam eşleşme veya içerme ile bul
+        # (Büyük küçük harf duyarlılığını kaldırdık)
+        df['name_lower'] = df['name'].str.lower()
+        search_name = product_name.lower()
+        
+        idx_list = df.index[df['name_lower'] == search_name].tolist()
+        
+        # Tam eşleşme yoksa, içinde geçenlere bak (örn: "Batman" aratınca "Batman #128" bulsun)
+        if not idx_list:
+            idx_list = df.index[df['name_lower'].str.contains(search_name, na=False)].tolist()
+
         if not idx_list:
             return ["Ürün veritabanında bulunamadı"]
-        idx = idx_list[0]
+        
+        idx = idx_list[0] # İlk eşleşeni al
 
-        # 2. Bu ürüne en çok benzeyenlerin puanlarını al
         sim_scores = list(enumerate(cosine_sim[idx]))
-        
-        # 3. Puana göre sırala (En yüksek puan en üstte)
         sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-
-        # 4. En iyi 3 ürünü seç (0. kendisi olduğu için 1'den başla)
-        sim_scores = sim_scores[1:4]
+        sim_scores = sim_scores[1:4] # Kendisi hariç en iyi 3
         
-        # 5. İsimlerini döndür
         product_indices = [i[0] for i in sim_scores]
         return df['name'].iloc[product_indices].tolist()
     
@@ -82,7 +100,7 @@ def get_recommendations(product_name):
         print(f"Analiz Hatası: {e}")
         return []
 
-# --- 4. API ENDPOINT (Node.js Buraya İstek Atacak) ---
+# --- 4. API ENDPOINT ---
 @app.route('/recommend', methods=['POST'])
 def recommend():
     data = request.get_json()
@@ -102,5 +120,5 @@ def recommend():
 
 # --- 5. SUNUCUYU BAŞLAT ---
 if __name__ == '__main__':
-    # Node.js 3000'de çalışıyor, biz karışmasın diye 5001 yapıyoruz.
-    app.run(port=5002, debug=True)
+    # PORT 5002 - Host 0.0.0.0 (Dışarıya açık)
+    app.run(host='0.0.0.0', port=5002, debug=True)

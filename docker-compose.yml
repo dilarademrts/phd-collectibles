@@ -47,7 +47,16 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
-      
 
+  ai_service:
+    build: ./ai-service   # Python klasörünün adı burayla aynı olmalı!
+    container_name: phd_ai_service
+    ports:
+      - "5002:5002"       # Dışarıya 5002 portunu açtık
+    volumes:
+      - ./ai-service:/app # Kod değişikliklerini anında gör
+      # DİKKAT: Python kodun "../backend" diyerek geriye çıkıyor.
+      # Konteyner içinde "/backend" klasörünü oluşturup senin backend klasörünü oraya bağlıyoruz.
+      - ./backend:/backend
 volumes:
   db_data:

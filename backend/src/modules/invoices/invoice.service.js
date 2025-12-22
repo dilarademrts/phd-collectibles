@@ -36,11 +36,27 @@ function generateInvoice(order) {
       doc.fontSize(12).text("Items:");
       doc.moveDown();
 
-      order.items.forEach(item => {
-        doc.text(
-          `${item.name} | Qty: ${item.quantity} | Unit: ${item.unit_price} | Total: ${item.quantity * item.unit_price}`
-        );
-      });
+      if (items && items.length > 0) {
+      items.forEach((item) => {
+        let y = doc.y;
+      
+      // Sayfa sonu kontrolü
+        if (y > 700) { doc.addPage(); y = 50; }
+
+        const productName = item.product_name || item.name || "Ürün";
+        const unitPrice = Number(item.unit_price || 0).toFixed(2);
+        const quantity = item.quantity || 1;
+
+      // Hizalamalı Yazdırma
+        doc.text(productName, itemX, y, { width: 280 });
+        doc.text(`${unitPrice} TL`, priceX, y);
+        doc.text(quantity.toString(), qtyX, y);
+
+        doc.moveDown();
+     });
+    } else {
+        doc.text("Bu siparişte ürün bulunamadı.", 50, doc.y);
+    }
 
       doc.moveDown();
       doc.fontSize(14).text(`Total Amount: ${order.total_amount}`);

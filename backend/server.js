@@ -20,6 +20,9 @@ const PORT = process.env.PORT || 5001;
 app.use(cors());
 app.use(express.json());
 
+const productController = require('./controllers/productController');
+app.get('/api/product/:name', productController.getProductDetail);
+
 // AI Rotaları
 app.use('/ai', aiRoutes);
 app.use("/orders", ordersRoutes);
