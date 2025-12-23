@@ -34,8 +34,6 @@ const mainItems = [
 ];
 
 const toolsItems = [
-  { title: "Invoices", url: "/invoices", icon: FileText },
-  { title: "Abandoned Carts", url: "/abandoned-carts", icon: ShoppingBag },
   { title: "Analytics", url: "/analytics", icon: BarChart3 },
   { title: "Automation", url: "/automation", icon: Workflow },
 ];

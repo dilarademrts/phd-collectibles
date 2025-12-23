@@ -26,6 +26,8 @@ app.use("/orders", ordersRoutes);
 app.use("/live", liveRoutes);
 app.use("/analytics", analyticsRoutes);
 app.use("/products", productsRoutes);
+app.use("/me", require("./src/routes/me"));
+app.use("/settings", require("./src/routes/settings.routes"));
 
 // Uploads klasörü kontrolü
 const uploadDir = 'uploads';
@@ -72,6 +74,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
         res.status(500).send('Excel işlenirken hata oluştu.');
     }
 });
+
 
 // Sunucuyu Başlat
 app.listen(PORT, () => {
