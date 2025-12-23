@@ -2,12 +2,17 @@ export const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL ?? "http://localhost:5001";
 
 async function json<T>(path: string, options: RequestInit = {}): Promise<T> {
+  const userId =
+    localStorage.getItem("user_id") ||
+    "c39967a5-0b09-4b1d-aa40-6765d979838b"; // fallback garanti
+
   const res = await fetch(`${API_BASE_URL}${path}`, {
+    ...options,
     headers: {
       "Content-Type": "application/json",
+      "x-user-id": userId,
       ...(options.headers ?? {}),
     },
-    ...options,
   });
 
   if (!res.ok) throw new Error(await res.text());
@@ -90,5 +95,25 @@ deleteProduct: (id: string) =>
     body: JSON.stringify(payload),
   }),
 
-  
+//settings
+me: () => json<{ user_id: string; name: string; email: string }>("/me"),
+  updateMe: (payload: { name: string; email: string }) =>
+    json("/me", { method: "PUT", body: JSON.stringify(payload) }),
+
+  getSettings: () =>
+    json<{
+      theme: "light" | "dark" | "system";
+      email_notifications: boolean;
+      push_notifications: boolean;
+    }>("/settings"),
+
+  updateSettings: (payload: {
+    theme: "light" | "dark" | "system";
+    email_notifications: boolean;
+    push_notifications: boolean;
+  }) => json("/settings", { method: "PUT", body: JSON.stringify(payload) }),
+
+  updatePassword: (payload: { newPassword: string }) =>
+    json("/me/password", { method: "PUT", body: JSON.stringify(payload) }),
+
 };
