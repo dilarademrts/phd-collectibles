@@ -12,6 +12,8 @@ const ordersRoutes = require("./src/routes/orders.routes");
 const liveRoutes = require("./src/modules/live-sale/live.routes");
 const analyticsRoutes = require("./src/routes/analytics.routes");
 const productsRoutes = require("./src/routes/products.routes");
+const productAnalyticsRoutes = require("./src/routes/productAnalytics.routes");
+
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -31,6 +33,8 @@ app.use("/analytics", analyticsRoutes);
 app.use("/products", productsRoutes);
 app.use("/me", require("./src/routes/me"));
 app.use("/settings", require("./src/routes/settings.routes"));
+app.use("/product-analytics", productAnalyticsRoutes);
+
 
 // Uploads klasörü kontrolü
 const uploadDir = 'uploads';
