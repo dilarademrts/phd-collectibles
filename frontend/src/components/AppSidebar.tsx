@@ -28,7 +28,7 @@ import { NavLink } from "@/components/NavLink";
 const mainItems = [
   { title: "Dashboard", url: "/", icon: LayoutDashboard },
   { title: "Live Stream", url: "/live-stream", icon: Radio },
-  { title: "Product Intelligence", url: "/pre-orders", icon: Clock },
+  { title: "Product Intelligence", url: "/product-intelligence", icon: Clock },
   { title: "Products", url: "/products", icon: Package },
   { title: "Orders", url: "/orders", icon: ShoppingCart },
 ];
